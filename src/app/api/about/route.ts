@@ -37,7 +37,8 @@ const testimonialData: TestimonialData = {
     },
     {
       rating: 5,
-      comment: "Kalıcı makyaj yaptırdım, sonuç beklentilerimin çok üstünde. Artık her sabah makyajsız bile harika görünüyorum!",
+      comment:
+        "Kalıcı makyaj yaptırdım, sonuç beklentilerimin çok üstünde. Artık her sabah makyajsız bile harika görünüyorum!",
       name: "Derya T.",
       service: "Kalıcı Makyaj",
     },
