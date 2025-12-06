@@ -1,0 +1,130 @@
+{
+    "auth": {
+        "login": {
+            "title": "Hesabınıza giriş yapın",
+            "description": "Giriş yapmak için e-posta ve şifrenizi girin",
+            "email": "E-posta adresi",
+            "password": "Şifre",
+            "remember": "Beni hatırla",
+            "forgot": "Şifrenizi mi unuttunuz?",
+            "submit": "Giriş yap",
+            "no_account": "Hesabınız yok mu?",
+            "sign_up": "Kayıt ol"
+        },
+        "register": {
+            "title": "Hesap oluşturun",
+            "description": "Hesabınızı oluşturmak için bilgilerinizi girin",
+            "name": "İsim",
+            "name_placeholder": "Ad Soyad",
+            "email": "E-posta adresi",
+            "password": "Şifre",
+            "confirm_password": "Şifreyi onayla",
+            "submit": "Hesap oluştur",
+            "has_account": "Zaten hesabınız var mı?",
+            "log_in": "Giriş yap"
+        },
+        "forgot_password": {
+            "title": "Şifremi unuttum",
+            "description": "Şifre sıfırlama bağlantısı almak için e-postanızı girin",
+            "email": "E-posta adresi",
+            "submit": "Şifre sıfırlama bağlantısı gönder",
+            "return_to": "Veya geri dön",
+            "log_in": "giriş yap"
+        },
+        "reset_password": {
+            "title": "Şifre sıfırla",
+            "description": "Lütfen yeni şifrenizi aşağıya girin",
+            "email": "E-posta",
+            "password": "Şifre",
+            "confirm_password": "Şifreyi onayla",
+            "submit": "Şifreyi sıfırla"
+        },
+        "verify_email": {
+            "title": "E-postayı doğrula",
+            "description": "Lütfen size gönderdiğimiz bağlantıya tıklayarak e-posta adresinizi doğrulayın.",
+            "page_title": "E-posta doğrulama",
+            "link_sent": "Kayıt sırasında verdiğiniz e-posta adresine yeni bir doğrulama bağlantısı gönderildi.",
+            "resend": "Doğrulama e-postasını yeniden gönder",
+            "log_out": "Çıkış yap"
+        },
+        "confirm_password": {
+            "title": "Şifrenizi onaylayın",
+            "description": "Bu, uygulamanın güvenli bir alanıdır. Devam etmeden önce lütfen şifrenizi onaylayın.",
+            "password": "Şifre",
+            "submit": "Şifreyi onayla"
+        }
+    },
+    "dashboard": {
+        "title": "Kontrol Paneli"
+    },
+    "welcome": {
+        "title": "Hoş Geldiniz",
+        "dashboard": "Kontrol Paneli",
+        "log_in": "Giriş yap",
+        "register": "Kayıt ol",
+        "get_started": "Haydi başlayalım",
+        "ecosystem_intro": "Laravel inanılmaz zengin bir ekosisteme sahip.",
+        "suggestion": "Aşağıdakilerle başlamanızı öneririz.",
+        "read_the": "Okuyun",
+        "documentation": "Dokümantasyon",
+        "watch_tutorials": "Video eğitimlerini izleyin",
+        "deploy_now": "Şimdi dağıt"
+    },
+    "settings": {
+        "title": "Ayarlar",
+        "description": "Profil ve hesap ayarlarınızı yönetin",
+        "profile": {
+            "title": "Profil ayarları",
+            "breadcrumb": "Profil ayarları",
+            "heading": "Profil bilgileri",
+            "description": "İsim ve e-posta adresinizi güncelleyin",
+            "name": "İsim",
+            "name_placeholder": "Ad Soyad",
+            "email": "E-posta adresi",
+            "email_placeholder": "E-posta adresi",
+            "unverified": "E-posta adresiniz doğrulanmamış.",
+            "resend_link": "Doğrulama e-postasını yeniden göndermek için tıklayın.",
+            "verification_sent": "E-posta adresinize yeni bir doğrulama bağlantısı gönderildi.",
+            "save": "Kaydet",
+            "saved": "Kaydedildi"
+        },
+        "password": {
+            "title": "Şifre ayarları",
+            "breadcrumb": "Şifre ayarları",
+            "heading": "Şifreyi güncelle",
+            "description": "Güvenliğiniz için uzun ve rastgele bir şifre kullandığınızdan emin olun",
+            "current": "Mevcut şifre",
+            "new": "Yeni şifre",
+            "confirm": "Şifreyi onayla",
+            "save": "Şifreyi kaydet",
+            "saved": "Kaydedildi"
+        },
+        "delete_account": {
+            "title": "Hesabı sil",
+            "description": "Hesabınızı ve tüm kaynaklarını silin",
+            "warning": "Uyarı",
+            "warning_text": "Lütfen dikkatli olun, bu işlem geri alınamaz.",
+            "confirm_title": "Hesabınızı silmek istediğinizden emin misiniz?",
+            "confirm_description": "Hesabınız silindiğinde, tüm kaynakları ve verileri de kalıcı olarak silinecektir. Hesabınızı kalıcı olarak silmek istediğinizi onaylamak için lütfen şifrenizi girin.",
+            "password": "Şifre",
+            "cancel": "İptal",
+            "submit": "Hesabı sil"
+        },
+        "nav": {
+            "profile": "Profil",
+            "password": "Şifre",
+            "two_factor": "İki Faktörlü Doğrulama"
+        }
+    },
+    "navigation": {
+        "platform": "Platform",
+        "settings": "Ayarlar",
+        "log_out": "Çıkış yap"
+    },
+    "common": {
+        "email_placeholder": "email@example.com",
+        "password_placeholder": "Şifre",
+        "confirm_password_placeholder": "Şifreyi onayla"
+    }
+}
+
