@@ -33,7 +33,7 @@ export default function Login({
             <Head title={t('auth.login.submit')} />
 
             <Form
-                {...store.form()}
+                {...store.post()}
                 resetOnSuccess={['password']}
                 className="flex flex-col gap-6"
             >
