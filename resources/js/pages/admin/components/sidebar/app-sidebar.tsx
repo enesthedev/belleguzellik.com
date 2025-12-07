@@ -1,7 +1,4 @@
 import AppLogo from '@/components/app-logo';
-import { NavFooter } from '@/pages/admin/components/sidebar/nav-footer';
-import { NavMain } from '@/pages/admin/components/sidebar/nav-main';
-import { NavUser } from '@/pages/admin/components/sidebar/nav-user';
 import {
     Sidebar,
     SidebarContent,
@@ -10,31 +7,23 @@ import {
     SidebarMenu,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { NavFooter } from '@/pages/admin/components/sidebar/nav-footer';
+import { NavMain } from '@/pages/admin/components/sidebar/nav-main';
+import { NavUser } from '@/pages/admin/components/sidebar/nav-user';
 import { dashboard } from '@/routes';
 import { type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { LayoutGrid } from 'lucide-react';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: 'Hizmetler',
         href: dashboard(),
         icon: LayoutGrid,
     },
 ];
 
-const footerNavItems: NavItem[] = [
-    {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
-    },
-];
+const footerNavItems: NavItem[] = [];
 
 export function AppSidebar() {
     const { auth } = usePage<SharedData>().props;
@@ -71,4 +60,3 @@ export function AppSidebar() {
         </Sidebar>
     );
 }
-

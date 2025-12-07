@@ -24,16 +24,16 @@ export default function DeleteUserDialog() {
     return (
         <div className="space-y-6">
             <HeadingSmall
-                title={t('settings.delete_account.title')}
-                description={t('settings.delete_account.description')}
+                title={t('Delete account')}
+                description={t('Delete your account and all of its resources')}
             />
             <div className="space-y-4 rounded-lg border border-red-100 bg-red-50 p-4 dark:border-red-200/10 dark:bg-red-700/10">
                 <div className="relative space-y-0.5 text-red-600 dark:text-red-100">
                     <p className="font-medium">
-                        {t('settings.delete_account.warning')}
+                        {t('Warning')}
                     </p>
                     <p className="text-sm">
-                        {t('settings.delete_account.warning_text')}
+                        {t('Please proceed with caution, this cannot be undone.')}
                     </p>
                 </div>
 
@@ -43,15 +43,15 @@ export default function DeleteUserDialog() {
                             variant="destructive"
                             data-test="delete-user-button"
                         >
-                            {t('settings.delete_account.submit')}
+                            {t('Delete account')}
                         </Button>
                     </DialogTrigger>
                     <DialogContent>
                         <DialogTitle>
-                            {t('settings.delete_account.confirm_title')}
+                            {t('Are you sure you want to delete your account?')}
                         </DialogTitle>
                         <DialogDescription>
-                            {t('settings.delete_account.confirm_description')}
+                            {t('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.')}
                         </DialogDescription>
 
                         <Form
@@ -70,9 +70,7 @@ export default function DeleteUserDialog() {
                                             htmlFor="password"
                                             className="sr-only"
                                         >
-                                            {t(
-                                                'settings.delete_account.password',
-                                            )}
+                                            {t('Password')}
                                         </Label>
 
                                         <Input
@@ -80,9 +78,7 @@ export default function DeleteUserDialog() {
                                             type="password"
                                             name="password"
                                             ref={passwordInput}
-                                            placeholder={t(
-                                                'settings.delete_account.password',
-                                            )}
+                                            placeholder={t('Password')}
                                             autoComplete="current-password"
                                         />
 
@@ -97,9 +93,7 @@ export default function DeleteUserDialog() {
                                                     resetAndClearErrors()
                                                 }
                                             >
-                                                {t(
-                                                    'settings.delete_account.cancel',
-                                                )}
+                                                {t('Cancel')}
                                             </Button>
                                         </DialogClose>
 
@@ -112,9 +106,7 @@ export default function DeleteUserDialog() {
                                                 type="submit"
                                                 data-test="confirm-delete-user-button"
                                             >
-                                                {t(
-                                                    'settings.delete_account.submit',
-                                                )}
+                                                {t('Delete account')}
                                             </button>
                                         </Button>
                                     </DialogFooter>

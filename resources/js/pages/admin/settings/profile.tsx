@@ -26,20 +26,20 @@ export default function Profile({
 
     const breadcrumbs: BreadcrumbItem[] = [
         {
-            title: t('settings.profile.breadcrumb'),
+            title: t('Profile settings'),
             href: edit().url,
         },
     ];
 
     return (
         <AdminLayout breadcrumbs={breadcrumbs}>
-            <Head title={t('settings.profile.title')} />
+            <Head title={t('Profile settings')} />
 
             <Layout>
                 <div className="space-y-6">
                     <HeadingSmall
-                        title={t('settings.profile.heading')}
-                        description={t('settings.profile.description')}
+                        title={t('Profile information')}
+                        description={t('Update your name and email address')}
                     />
 
                     <Form
@@ -53,7 +53,7 @@ export default function Profile({
                             <>
                                 <div className="grid gap-2">
                                     <Label htmlFor="name">
-                                        {t('settings.profile.name')}
+                                        {t('Name')}
                                     </Label>
 
                                     <Input
@@ -63,9 +63,7 @@ export default function Profile({
                                         name="name"
                                         required
                                         autoComplete="name"
-                                        placeholder={t(
-                                            'settings.profile.name_placeholder',
-                                        )}
+                                        placeholder={t('Full name')}
                                     />
 
                                     <InputError
@@ -76,7 +74,7 @@ export default function Profile({
 
                                 <div className="grid gap-2">
                                     <Label htmlFor="email">
-                                        {t('settings.profile.email')}
+                                        {t('Email address')}
                                     </Label>
 
                                     <Input
@@ -87,9 +85,7 @@ export default function Profile({
                                         name="email"
                                         required
                                         autoComplete="username"
-                                        placeholder={t(
-                                            'settings.profile.email_placeholder',
-                                        )}
+                                        placeholder={t('Email address')}
                                     />
 
                                     <InputError
@@ -103,7 +99,7 @@ export default function Profile({
                                         <div>
                                             <p className="-mt-4 text-sm text-muted-foreground">
                                                 {t(
-                                                    'settings.profile.unverified',
+                                                    'Your email address is unverified.',
                                                 )}{' '}
                                                 <Link
                                                     href={send()}
@@ -111,7 +107,7 @@ export default function Profile({
                                                     className="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
                                                 >
                                                     {t(
-                                                        'settings.profile.resend_link',
+                                                        'Click to resend the verification email.',
                                                     )}
                                                 </Link>
                                             </p>
@@ -120,7 +116,7 @@ export default function Profile({
                                                 'verification-link-sent' && (
                                                 <div className="mt-2 text-sm font-medium text-green-600">
                                                     {t(
-                                                        'settings.profile.verification_sent',
+                                                        'A new verification link has been sent to your email address.',
                                                     )}
                                                 </div>
                                             )}
@@ -132,7 +128,7 @@ export default function Profile({
                                         disabled={processing}
                                         data-test="update-profile-button"
                                     >
-                                        {t('settings.profile.save')}
+                                        {t('Save')}
                                     </Button>
 
                                     <Transition
@@ -143,7 +139,7 @@ export default function Profile({
                                         leaveTo="opacity-0"
                                     >
                                         <p className="text-sm text-neutral-600">
-                                            {t('settings.profile.saved')}
+                                            {t('Saved')}
                                         </p>
                                     </Transition>
                                 </div>

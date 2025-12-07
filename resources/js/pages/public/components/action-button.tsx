@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 interface ActionButtonProps {
     href: string;
@@ -14,6 +15,8 @@ export function ActionButton({
     label,
     className,
 }: ActionButtonProps) {
+    const { t } = useTranslation();
+
     return (
         <Button
             variant="action"
@@ -26,7 +29,7 @@ export function ActionButton({
             <a href={href} target="_blank" rel="noopener noreferrer">
                 <span className="absolute left-5 shrink-0">{icon}</span>
                 <span className="w-full text-center font-medium">{label}</span>
-                <span className="sr-only">(yeni sekmede açılır)</span>
+                <span className="sr-only">({t('Opens in new tab')})</span>
             </a>
         </Button>
     );

@@ -19,10 +19,10 @@ export default function Login({ status, canRegister }: LoginProps) {
 
     return (
         <Layout
-            title={t('auth.login.title')}
-            description={t('auth.login.description')}
+            title={t('Log in to your account')}
+            description={t('Enter your email and password to log in')}
         >
-            <Head title={t('auth.login.submit')} />
+            <Head title={t('Log in')} />
 
             <Form
                 {...store.post()}
@@ -37,7 +37,7 @@ export default function Login({ status, canRegister }: LoginProps) {
                                     id="email"
                                     type="email"
                                     name="email"
-                                    label={t('common.email_placeholder')}
+                                    label={t('Your email address')}
                                     required
                                     autoFocus
                                     tabIndex={1}
@@ -52,7 +52,7 @@ export default function Login({ status, canRegister }: LoginProps) {
                                     id="password"
                                     type="password"
                                     name="password"
-                                    label={t('common.password_placeholder')}
+                                    label={t('Your password')}
                                     required
                                     tabIndex={2}
                                     autoComplete="current-password"
@@ -69,15 +69,15 @@ export default function Login({ status, canRegister }: LoginProps) {
                                 variant={'secondary'}
                             >
                                 {processing && <Spinner />}
-                                {t('auth.login.submit')}
+                                {t('Log in')}
                             </Button>
                         </div>
 
                         {canRegister && (
                             <div className="text-center text-sm text-muted-foreground">
-                                {t('auth.login.no_account')}{' '}
+                                {t("Don't have an account?")}{' '}
                                 <TextLink href={register()} tabIndex={5}>
-                                    {t('auth.login.sign_up')}
+                                    {t('Sign up')}
                                 </TextLink>
                             </div>
                         )}

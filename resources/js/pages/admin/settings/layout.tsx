@@ -14,12 +14,12 @@ export default function Layout({ children }: PropsWithChildren) {
 
     const sidebarNavItems: NavItem[] = [
         {
-            title: t('settings.nav.profile'),
+            title: t('Profile'),
             href: edit(),
             icon: null,
         },
         {
-            title: t('settings.nav.password'),
+            title: t('Password'),
             href: editPassword(),
             icon: null,
         },
@@ -34,8 +34,8 @@ export default function Layout({ children }: PropsWithChildren) {
     return (
         <div className="px-4 py-6">
             <Heading
-                title={t('settings.title')}
-                description={t('settings.description')}
+                title={t('Settings')}
+                description={t('Manage your profile and account settings')}
             />
 
             <div className="flex flex-col lg:flex-row lg:space-x-12">
