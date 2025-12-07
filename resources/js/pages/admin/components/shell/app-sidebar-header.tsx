@@ -1,5 +1,5 @@
-import { Breadcrumbs } from '@/pages/admin/components/layout/breadcrumbs';
 import { SidebarTrigger } from '@/components/ui/sidebar';
+import { Breadcrumbs } from '@/pages/admin/components/shell/breadcrumbs';
 import { type BreadcrumbItem as BreadcrumbItemType } from '@/types';
 
 export function AppSidebarHeader({
@@ -16,4 +16,3 @@ export function AppSidebarHeader({
         </header>
     );
 }
-

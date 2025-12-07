@@ -2,6 +2,7 @@ import { dashboard, login } from '@/routes';
 import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+import Layout from './layout';
 
 export default function Welcome({
     canRegister = false,
@@ -12,7 +13,7 @@ export default function Welcome({
     const { t } = useTranslation();
 
     return (
-        <>
+        <Layout>
             <Head title={t('welcome.title')}>
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link
@@ -181,7 +182,6 @@ export default function Welcome({
                 </div>
                 <div className="hidden h-14.5 lg:block"></div>
             </div>
-        </>
+        </Layout>
     );
 }
-

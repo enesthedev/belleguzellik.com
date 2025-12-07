@@ -1,6 +1,6 @@
-import AuthSplitLayout from '@/pages/auth/components/layout/auth-split-layout';
+import AuthSplitLayout from '@/pages/auth/components/layouts/auth-split-layout';
 
-export default function AuthLayout({
+export default function Layout({
     children,
     title,
     description,
@@ -16,4 +16,3 @@ export default function AuthLayout({
         </AuthSplitLayout>
     );
 }
-

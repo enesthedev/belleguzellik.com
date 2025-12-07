@@ -1,7 +1,7 @@
-import { AppContent } from '@/pages/admin/components/layout/app-content';
-import { AppShell } from '@/pages/admin/components/layout/app-shell';
+import { AppContent } from '@/pages/admin/components/shell/app-content';
+import { AppShell } from '@/pages/admin/components/shell/app-shell';
+import { AppSidebarHeader } from '@/pages/admin/components/shell/app-sidebar-header';
 import { AppSidebar } from '@/pages/admin/components/sidebar/app-sidebar';
-import { AppSidebarHeader } from '@/pages/admin/components/layout/app-sidebar-header';
 import { type BreadcrumbItem } from '@/types';
 import { type PropsWithChildren } from 'react';
 
@@ -19,4 +19,3 @@ export default function AdminSidebarLayout({
         </AppShell>
     );
 }
-

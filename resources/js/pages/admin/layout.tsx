@@ -1,4 +1,4 @@
-import AdminSidebarLayout from '@/pages/admin/components/layout/admin-sidebar-layout';
+import AdminSidebarLayout from '@/pages/admin/components/shell/admin-sidebar-layout';
 import { type BreadcrumbItem } from '@/types';
 import { type ReactNode } from 'react';
 

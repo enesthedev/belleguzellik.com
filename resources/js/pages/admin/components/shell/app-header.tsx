@@ -1,8 +1,6 @@
 import AppLogo from '@/components/app-logo';
 import AppLogoIcon from '@/components/app-logo-icon';
 import { Icon } from '@/components/icon';
-import { Breadcrumbs } from '@/pages/admin/components/layout/breadcrumbs';
-import { UserMenuContent } from '@/pages/admin/components/sidebar/user-menu-content';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -31,6 +29,8 @@ import {
 } from '@/components/ui/tooltip';
 import { useInitials } from '@/hooks/use-initials';
 import { cn, isSameUrl, resolveUrl } from '@/lib/utils';
+import { Breadcrumbs } from '@/pages/admin/components/shell/breadcrumbs';
+import { UserMenuContent } from '@/pages/admin/components/sidebar/user-menu-content';
 import { dashboard } from '@/routes';
 import { type BreadcrumbItem, type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
@@ -259,4 +259,3 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
         </>
     );
 }
-

@@ -1,6 +1,5 @@
 import { type PropsWithChildren } from 'react';
 
-export default function PublicLayout({ children }: PropsWithChildren) {
+export default function Layout({ children }: PropsWithChildren) {
     return <>{children}</>;
 }
-
