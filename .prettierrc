@@ -8,11 +8,8 @@
         "prettier-plugin-organize-imports",
         "prettier-plugin-tailwindcss"
     ],
-    "tailwindFunctions": [
-        "clsx",
-        "cn"
-    ],
-    "tailwindStylesheet": "resources/css/app.css",
+    "tailwindFunctions": ["clsx", "cn"],
+    "tailwindStylesheet": "resources/js/styles/globals.css",
     "tabWidth": 4,
     "overrides": [
         {
