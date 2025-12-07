@@ -10,6 +10,7 @@
 @theme {
     --font-sans: 'Outfit', sans-serif;
     --font-serif: 'Cormorant', serif;
+    --font-inter: 'Inter', sans-serif;
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);

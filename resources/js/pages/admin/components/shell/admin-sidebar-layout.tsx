@@ -8,9 +8,10 @@ import { type PropsWithChildren } from 'react';
 export default function AdminSidebarLayout({
     children,
     breadcrumbs = [],
-}: PropsWithChildren<{ breadcrumbs?: BreadcrumbItem[] }>) {
+    className,
+}: PropsWithChildren<{ breadcrumbs?: BreadcrumbItem[]; className?: string }>) {
     return (
-        <AppShell variant="sidebar">
+        <AppShell variant="sidebar" className={className}>
             <AppSidebar />
             <AppContent variant="sidebar" className="overflow-x-hidden">
                 <AppSidebarHeader breadcrumbs={breadcrumbs} />

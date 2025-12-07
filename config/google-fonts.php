@@ -9,6 +9,7 @@ return [
     'fonts' => [
         'outfit' => 'https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;900',
         'cormorant' => 'https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700',
+        'inter' => 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700',
     ],
 
     /*

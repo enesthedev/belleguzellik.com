@@ -8,7 +8,7 @@ interface LayoutProps {
 }
 
 export default ({ children, breadcrumbs, ...props }: LayoutProps) => (
-    <AdminSidebarLayout breadcrumbs={breadcrumbs} {...props}>
+    <AdminSidebarLayout breadcrumbs={breadcrumbs} className="font-inter" {...props}>
         {children}
     </AdminSidebarLayout>
 );

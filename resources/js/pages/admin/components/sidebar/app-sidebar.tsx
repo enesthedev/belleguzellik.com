@@ -13,13 +13,13 @@ import { NavUser } from '@/pages/admin/components/sidebar/nav-user';
 import { dashboard } from '@/routes';
 import { type NavItem, type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { LayoutGrid } from 'lucide-react';
+import { Home } from 'lucide-react';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Hizmetler',
+        title: 'Overview',
         href: dashboard(),
-        icon: LayoutGrid,
+        icon: Home,
     },
 ];
 
