@@ -12,7 +12,9 @@ export interface BreadcrumbItem {
 export interface NavItem {
     title: string;
     url?: string;
-    icon?: LucideIcon;
+    /** @deprecated Use `url` instead. Kept for backward compatibility */
+    href?: string;
+    icon?: LucideIcon | null;
     badge?: string | number;
     items?: NavItem[];
 }
