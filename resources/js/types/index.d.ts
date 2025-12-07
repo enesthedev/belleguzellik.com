@@ -1,4 +1,3 @@
-import { InertiaLinkProps } from '@inertiajs/react';
 import { LucideIcon } from 'lucide-react';
 
 export interface Auth {
@@ -10,20 +9,12 @@ export interface BreadcrumbItem {
     href: string;
 }
 
-export interface NavGroup {
-    title?: string;
-    collapsible?: boolean;
-    defaultOpen?: boolean;
-    items: NavItem[];
-}
-
 export interface NavItem {
     title: string;
-    href?: NonNullable<InertiaLinkProps['href']>;
-    icon?: LucideIcon | null;
+    url?: string;
+    icon?: LucideIcon;
     badge?: string | number;
-    isActive?: boolean;
-    children?: NavItem[];
+    items?: NavItem[];
 }
 
 export interface SharedData {

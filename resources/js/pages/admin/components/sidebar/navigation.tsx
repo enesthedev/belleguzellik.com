@@ -6,28 +6,30 @@ import {
 import {
     SidebarGroup,
     SidebarGroupContent,
-    SidebarGroupLabel,
     SidebarMenu,
     SidebarMenuBadge,
     SidebarMenuButton,
     SidebarMenuItem,
+    SidebarMenuSkeleton,
     SidebarMenuSub,
     SidebarMenuSubButton,
     SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
-import { resolveUrl } from '@/lib/utils';
-import { type NavGroup, type NavItem } from '@/types';
+import { type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { ChevronRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-function NavItemLink({ item }: { item: NavItem }) {
-    const page = usePage();
+function isActiveUrl(currentUrl: string, itemUrl?: string): boolean {
+    if (!itemUrl) return false;
+    return currentUrl === itemUrl || currentUrl.startsWith(itemUrl + '/');
+}
+
+function NavLink({ item }: { item: NavItem }) {
+    const { url: currentUrl } = usePage();
     const { t } = useTranslation();
 
-    const isActive = item.href
-        ? page.url.startsWith(resolveUrl(item.href))
-        : false;
+    const isActive = isActiveUrl(currentUrl, item.url);
 
     return (
         <SidebarMenuButton
@@ -35,7 +37,7 @@ function NavItemLink({ item }: { item: NavItem }) {
             isActive={isActive}
             tooltip={{ children: t(item.title) }}
         >
-            <Link href={item.href ?? '#'} prefetch>
+            <Link href={item.url ?? '#'} prefetch>
                 {item.icon && <item.icon />}
                 <span>{t(item.title)}</span>
             </Link>
@@ -43,12 +45,20 @@ function NavItemLink({ item }: { item: NavItem }) {
     );
 }
 
-function NavItemWithChildren({ item }: { item: NavItem }) {
-    const page = usePage();
+function NavCollapsible({ item }: { item: NavItem }) {
+    const { url: currentUrl } = usePage();
     const { t } = useTranslation();
 
+    const hasActiveChild = item.items?.some((child) =>
+        isActiveUrl(currentUrl, child.url),
+    );
+
     return (
-        <Collapsible asChild defaultOpen={true} className="group/collapsible">
+        <Collapsible
+            asChild
+            defaultOpen={hasActiveChild}
+            className="group/collapsible"
+        >
             <SidebarMenuItem>
                 <CollapsibleTrigger asChild>
                     <SidebarMenuButton tooltip={{ children: t(item.title) }}>
@@ -59,19 +69,13 @@ function NavItemWithChildren({ item }: { item: NavItem }) {
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                     <SidebarMenuSub>
-                        {item.children?.map((child) => (
+                        {item.items?.map((child) => (
                             <SidebarMenuSubItem key={child.title}>
                                 <SidebarMenuSubButton
                                     asChild
-                                    isActive={
-                                        child.href
-                                            ? page.url.startsWith(
-                                                  resolveUrl(child.href),
-                                              )
-                                            : false
-                                    }
+                                    isActive={isActiveUrl(currentUrl, child.url)}
                                 >
-                                    <Link href={child.href ?? '#'} prefetch>
+                                    <Link href={child.url ?? '#'} prefetch>
                                         {child.icon && <child.icon />}
                                         <span>{t(child.title)}</span>
                                     </Link>
@@ -85,42 +89,52 @@ function NavItemWithChildren({ item }: { item: NavItem }) {
     );
 }
 
-function NavMenuItems({ items }: { items: NavItem[] }) {
-    return (
-        <SidebarMenu>
-            {items.map((item) => {
-                if (item.children && item.children.length > 0) {
-                    return <NavItemWithChildren key={item.title} item={item} />;
-                }
-
-                return (
-                    <SidebarMenuItem key={item.title}>
-                        <NavItemLink item={item} />
-                        {item.badge !== undefined && (
-                            <SidebarMenuBadge>{item.badge}</SidebarMenuBadge>
-                        )}
-                    </SidebarMenuItem>
-                );
-            })}
-        </SidebarMenu>
-    );
+interface NavigationProps {
+    items: NavItem[];
+    isLoading?: boolean;
 }
 
-export function Navigation({ groups = [] }: { groups: NavGroup[] }) {
-    const { t } = useTranslation();
+export function Navigation({ items, isLoading = false }: NavigationProps) {
+    if (isLoading) {
+        return (
+            <SidebarGroup>
+                <SidebarGroupContent>
+                    <SidebarMenu>
+                        {Array.from({ length: 5 }).map((_, index) => (
+                            <SidebarMenuItem key={index}>
+                                <SidebarMenuSkeleton showIcon />
+                            </SidebarMenuItem>
+                        ))}
+                    </SidebarMenu>
+                </SidebarGroupContent>
+            </SidebarGroup>
+        );
+    }
 
     return (
-        <>
-            {groups.map((group, groupIndex) => (
-                <SidebarGroup key={groupIndex} className="px-2 py-2">
-                    {group.title && (
-                        <SidebarGroupLabel>{t(group.title)}</SidebarGroupLabel>
-                    )}
-                    <SidebarGroupContent className="flex flex-col gap-2">
-                        <NavMenuItems items={group.items} />
-                    </SidebarGroupContent>
-                </SidebarGroup>
-            ))}
-        </>
+        <SidebarGroup>
+            <SidebarGroupContent>
+                <SidebarMenu>
+                    {items.map((item) => {
+                        if (item.items && item.items.length > 0) {
+                            return (
+                                <NavCollapsible key={item.title} item={item} />
+                            );
+                        }
+
+                        return (
+                            <SidebarMenuItem key={item.title}>
+                                <NavLink item={item} />
+                                {item.badge !== undefined && (
+                                    <SidebarMenuBadge>
+                                        {item.badge}
+                                    </SidebarMenuBadge>
+                                )}
+                            </SidebarMenuItem>
+                        );
+                    })}
+                </SidebarMenu>
+            </SidebarGroupContent>
+        </SidebarGroup>
     );
 }

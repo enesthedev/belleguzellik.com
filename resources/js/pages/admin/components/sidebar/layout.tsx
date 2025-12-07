@@ -6,10 +6,19 @@ import {
     SidebarHeader,
     SidebarMenu,
     SidebarMenuItem,
+    SidebarRail,
+    SidebarSeparator,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
 import { SharedData, type BreadcrumbItem } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
+import {
+    FileText,
+    FolderKanban,
+    LayoutDashboard,
+    MessageSquare,
+    Scissors,
+} from 'lucide-react';
 import { type PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Content } from '../shell/content';
@@ -25,6 +34,7 @@ export default function Layout({
 }: PropsWithChildren<{ breadcrumbs?: BreadcrumbItem[]; className?: string }>) {
     const { auth } = usePage<SharedData>().props;
     const { t } = useTranslation();
+
     return (
         <Shell variant="sidebar" className={className}>
             <Sidebar collapsible="icon" variant="inset">
@@ -48,30 +58,32 @@ export default function Layout({
                 </SidebarHeader>
 
                 <SidebarContent>
+                    <SidebarSeparator className="mx-0" />
                     <Navigation
-                        groups={[
+                        items={[
                             {
+                                title: t('Overview'),
+                                url: dashboard.url(),
+                                icon: LayoutDashboard,
+                            },
+                            {
+                                title: t('Content Management'),
+                                icon: FolderKanban,
                                 items: [
                                     {
-                                        title: 'Overview',
-                                        href: dashboard(),
+                                        title: t('Comments'),
+                                        url: '/admin/comments',
+                                        icon: MessageSquare,
                                     },
                                     {
-                                        title: 'Content Management',
-                                        children: [
-                                            {
-                                                title: 'Comments',
-                                                href: '/admin/comments',
-                                            },
-                                            {
-                                                title: 'Services',
-                                                href: '/admin/services',
-                                            },
-                                            {
-                                                title: 'Posts',
-                                                href: '/admin/posts',
-                                            },
-                                        ],
+                                        title: t('Services'),
+                                        url: '/admin/services',
+                                        icon: Scissors,
+                                    },
+                                    {
+                                        title: t('Posts'),
+                                        url: '/admin/posts',
+                                        icon: FileText,
                                     },
                                 ],
                             },
@@ -82,6 +94,7 @@ export default function Layout({
                 <SidebarFooter>
                     <UserNavigation />
                 </SidebarFooter>
+                <SidebarRail />
             </Sidebar>
             <Content variant="sidebar" className="overflow-x-hidden">
                 <ContentHeader breadcrumbs={breadcrumbs} />
