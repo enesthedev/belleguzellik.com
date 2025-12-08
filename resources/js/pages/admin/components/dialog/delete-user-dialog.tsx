@@ -1,4 +1,4 @@
-import DeleteProfile from '@/actions/App/Actions/Settings/DeleteProfile';
+import DeleteProfile from '@/actions/App/Actions/Admin/Settings/DeleteProfile';
 import InputError from '@/components/forms/input-error';
 import HeadingSmall from '@/components/heading-small';
 import { Button } from '@/components/ui/button';

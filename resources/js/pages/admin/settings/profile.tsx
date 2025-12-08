@@ -3,7 +3,7 @@ import { Transition } from '@headlessui/react';
 import { Form, Head, Link, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
-import UpdateProfile from '@/actions/App/Actions/Settings/UpdateProfile';
+import UpdateProfile from '@/actions/App/Actions/Admin/Settings/UpdateProfile';
 import InputError from '@/components/forms/input-error';
 import HeadingSmall from '@/components/heading-small';
 import { Button } from '@/components/ui/button';

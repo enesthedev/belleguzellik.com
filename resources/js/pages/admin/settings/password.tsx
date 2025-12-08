@@ -7,7 +7,6 @@ import { Form, Head } from '@inertiajs/react';
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import UpdatePassword from '@/actions/App/Actions/Settings/UpdatePassword';
 import HeadingSmall from '@/components/heading-small';
 
 import { Button } from '@/components/ui/button';
@@ -15,6 +14,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { edit } from '@/routes/user-password';
 
+import UpdatePassword from '@/actions/App/Actions/Admin/Settings/UpdatePassword';
 import Layout from './layout';
 
 export default function Password() {
@@ -37,7 +37,9 @@ export default function Password() {
                 <div className="space-y-6">
                     <HeadingSmall
                         title={t('Update password')}
-                        description={t('Ensure your account is using a long, random password to stay secure')}
+                        description={t(
+                            'Ensure your account is using a long, random password to stay secure',
+                        )}
                     />
 
                     <Form
