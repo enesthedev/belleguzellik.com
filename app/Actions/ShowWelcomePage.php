@@ -15,7 +15,7 @@ class ShowWelcomePage
             ->where('is_active', true)
             ->orderByDesc('id')
             ->get()
-            ->map(fn(Comment $comment) => [
+            ->map(fn (Comment $comment) => [
                 'id' => $comment->id,
                 'author' => $comment->author,
                 'content' => $comment->content,
@@ -25,7 +25,7 @@ class ShowWelcomePage
                 'created_at' => $comment->created_at->toIso8601String(),
             ]);
 
-        return Inertia::render('public/welcome', [
+        return Inertia::render('welcome', [
             'canRegister' => Features::enabled(Features::registration()),
             'comments' => $comments,
         ]);

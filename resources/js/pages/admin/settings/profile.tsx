@@ -9,7 +9,6 @@ import HeadingSmall from '@/components/heading-small';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import DeleteUserDialog from '@/pages/admin/components/dialog/delete-user-dialog';
 import AdminLayout from '@/pages/admin/layout';
 import { edit } from '@/routes/profile';
 import Layout from './layout';
@@ -145,8 +144,6 @@ export default function Profile({
                         )}
                     </Form>
                 </div>
-
-                <DeleteUserDialog />
             </Layout>
         </AdminLayout>
     );

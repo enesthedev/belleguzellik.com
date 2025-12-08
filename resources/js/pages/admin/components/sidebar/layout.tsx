@@ -10,19 +10,14 @@ import {
     SidebarSeparator,
 } from '@/components/ui/sidebar';
 import {
-    CommentsCountProvider,
-    useCommentsCount,
-} from '@/contexts/comments-count-context';
+    SidebarCountProvider,
+    useSidebarCount,
+} from '@/contexts/sidebar-count-context';
 import admin from '@/routes/admin';
 import { SharedData, type BreadcrumbItem } from '@/types';
 import type { NavGroup } from '@/types/nav';
 import { Link, usePage } from '@inertiajs/react';
-import {
-    FileText,
-    LayoutDashboard,
-    MessageSquare,
-    Scissors,
-} from 'lucide-react';
+import { LayoutDashboard, MessageSquare, Scissors } from 'lucide-react';
 import { type PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Content } from '../shell/content';
@@ -38,7 +33,7 @@ function LayoutContent({
 }: PropsWithChildren<{ breadcrumbs?: BreadcrumbItem[]; className?: string }>) {
     const { auth } = usePage<SharedData>().props;
     const { t } = useTranslation();
-    const { count: commentsCount } = useCommentsCount();
+    const { counts } = useSidebarCount();
 
     const navigationGroups: NavGroup[] = [
         {
@@ -60,19 +55,13 @@ function LayoutContent({
                     title: t('Comments'),
                     url: admin.comments.index().url,
                     icon: MessageSquare,
-                    badge: commentsCount,
+                    badge: counts?.comments,
                 },
                 {
                     title: t('Services'),
-                    url: '/admin/services',
+                    url: admin.services.index().url,
                     icon: Scissors,
-                    badge: 5,
-                },
-                {
-                    title: t('Posts'),
-                    url: '/admin/posts',
-                    icon: FileText,
-                    badge: 2,
+                    badge: counts?.services,
                 },
             ],
         },
@@ -125,8 +114,8 @@ export default function Layout(
     }>,
 ) {
     return (
-        <CommentsCountProvider>
+        <SidebarCountProvider>
             <LayoutContent {...props} />
-        </CommentsCountProvider>
+        </SidebarCountProvider>
     );
 }

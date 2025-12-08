@@ -1,3 +1,4 @@
+import DeleteService from '@/actions/App/Actions/Admin/Services/DeleteService';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -15,19 +16,19 @@ import { useTranslation } from 'react-i18next';
 interface Props {
     open: boolean;
     onOpenChange: (open: boolean) => void;
-    commentId: number | null;
+    serviceId: number | null;
 }
 
-export function DeleteCommentDialog({ open, onOpenChange, commentId }: Props) {
+export function DeleteServiceDialog({ open, onOpenChange, serviceId }: Props) {
     const { t } = useTranslation();
     const { refetch } = useSidebarCount();
 
     const handleDelete = () => {
-        if (commentId) {
-            router.delete(`/admin/comments/${commentId}`, {
+        if (serviceId) {
+            router.delete(DeleteService.url(serviceId), {
                 onSuccess: () => {
-                    refetch();
                     onOpenChange(false);
+                    refetch();
                 },
             });
         }
@@ -38,11 +39,11 @@ export function DeleteCommentDialog({ open, onOpenChange, commentId }: Props) {
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>
-                        {t('Are you sure you want to delete this comment?')}
+                        {t('Are you sure you want to delete this service?')}
                     </AlertDialogTitle>
                     <AlertDialogDescription>
                         {t(
-                            'This action cannot be undone. This will permanently delete the comment.',
+                            'This action cannot be undone. This will permanently delete the service.',
                         )}
                     </AlertDialogDescription>
                 </AlertDialogHeader>
@@ -59,3 +60,4 @@ export function DeleteCommentDialog({ open, onOpenChange, commentId }: Props) {
         </AlertDialog>
     );
 }
+
