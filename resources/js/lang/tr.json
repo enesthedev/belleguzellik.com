@@ -111,5 +111,10 @@
     "Previous": "Önceki",
     "Next": "Sonraki",
     "No results.": "Sonuç yok.",
-    "Comment Details": "Yorum Detayları"
+    "Comment Details": "Yorum Detayları",
+    "Rated {{rating}} out of 5": "5 üzerinden {{rating}} puan",
+    "Go to comment {{index}}": "{{index}}. yoruma git",
+    "What Our Clients Say": "Müşterilerimiz Ne Diyor",
+    "Hear from our satisfied customers about their experience": "Sizin memnuniyetiniz bizim önceliğimiz. İşte müşterilerimizin deneyimleri.",
+    "Customer": "Müşteri"
 }
