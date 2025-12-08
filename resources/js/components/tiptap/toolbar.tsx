@@ -1,26 +1,43 @@
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { Toggle } from '@/components/ui/toggle';
 import { type Editor } from '@tiptap/react';
 import axios from 'axios';
 import {
+    AlignCenter,
+    AlignLeft,
+    AlignRight,
     Bold,
+    CheckSquare,
     Code,
+    Grid2X2,
+    Grid3X3,
     Heading1,
     Heading2,
     Heading3,
     Image,
     Italic,
+    LayoutGrid,
     Link,
     List,
     ListOrdered,
     Loader2,
+    MessageSquareQuote,
     Quote,
     Redo,
+    Square,
     Strikethrough,
     Table,
     Undo,
 } from 'lucide-react';
 import { useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import type { CardVariant } from './extensions';
 
 interface ToolbarProps {
     editor: Editor | null;
@@ -115,6 +132,32 @@ export function Toolbar({ editor, uploadEndpoint, sessionKey }: ToolbarProps) {
             .focus()
             .insertTable({ rows: 3, cols: 3, withHeaderRow: true })
             .run();
+    }, [editor]);
+
+    const insertGrid = useCallback(
+        (cols: 2 | 3) => {
+            if (!editor) return;
+            editor.chain().focus().insertGrid(cols).run();
+        },
+        [editor],
+    );
+
+    const insertCard = useCallback(
+        (variant: CardVariant) => {
+            if (!editor) return;
+            editor.chain().focus().insertCard(variant).run();
+        },
+        [editor],
+    );
+
+    const insertCallout = useCallback(() => {
+        if (!editor) return;
+        editor.chain().focus().insertCallout().run();
+    }, [editor]);
+
+    const insertIconList = useCallback(() => {
+        if (!editor) return;
+        editor.chain().focus().insertIconList().run();
     }, [editor]);
 
     if (!editor) return null;
@@ -273,6 +316,83 @@ export function Toolbar({ editor, uploadEndpoint, sessionKey }: ToolbarProps) {
                 aria-label={t('Table')}
             >
                 <Table className="size-4" />
+            </Toggle>
+
+            <div className="mx-1 h-6 w-px bg-border" />
+
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Toggle size="sm" aria-label={t('Layout Components')}>
+                        <LayoutGrid className="size-4" />
+                    </Toggle>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                    <DropdownMenuItem onClick={() => insertGrid(2)}>
+                        <Grid2X2 className="mr-2 size-4" />
+                        {t('2 Column Grid')}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => insertGrid(3)}>
+                        <Grid3X3 className="mr-2 size-4" />
+                        {t('3 Column Grid')}
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={() => insertCard('pink')}>
+                        <Square className="mr-2 size-4 text-pink-500" />
+                        {t('Pink Card')}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => insertCard('white')}>
+                        <Square className="mr-2 size-4" />
+                        {t('White Card')}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => insertCard('gray')}>
+                        <Square className="mr-2 size-4 text-gray-500" />
+                        {t('Gray Card')}
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={insertCallout}>
+                        <MessageSquareQuote className="mr-2 size-4" />
+                        {t('Callout')}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={insertIconList}>
+                        <CheckSquare className="mr-2 size-4" />
+                        {t('Icon List')}
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
+
+            <div className="mx-1 h-6 w-px bg-border" />
+
+            <Toggle
+                size="sm"
+                pressed={editor.isActive({ textAlign: 'left' })}
+                onPressedChange={() =>
+                    editor.chain().focus().setTextAlign('left').run()
+                }
+                aria-label={t('Align Left')}
+            >
+                <AlignLeft className="size-4" />
+            </Toggle>
+
+            <Toggle
+                size="sm"
+                pressed={editor.isActive({ textAlign: 'center' })}
+                onPressedChange={() =>
+                    editor.chain().focus().setTextAlign('center').run()
+                }
+                aria-label={t('Align Center')}
+            >
+                <AlignCenter className="size-4" />
+            </Toggle>
+
+            <Toggle
+                size="sm"
+                pressed={editor.isActive({ textAlign: 'right' })}
+                onPressedChange={() =>
+                    editor.chain().focus().setTextAlign('right').run()
+                }
+                aria-label={t('Align Right')}
+            >
+                <AlignRight className="size-4" />
             </Toggle>
 
             <div className="mx-1 h-6 w-px bg-border" />

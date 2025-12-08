@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import { Color } from '@tiptap/extension-color';
 import Image from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
@@ -6,10 +7,23 @@ import { Table } from '@tiptap/extension-table';
 import { TableCell } from '@tiptap/extension-table-cell';
 import { TableHeader } from '@tiptap/extension-table-header';
 import { TableRow } from '@tiptap/extension-table-row';
+import { TextAlign } from '@tiptap/extension-text-align';
+import { TextStyle } from '@tiptap/extension-text-style';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import {
+    Callout,
+    ContentWrapper,
+    FeatureIcon,
+    FeatureIconWrapper,
+    IconList,
+    IconListItem,
+    InlineSvg,
+    ServiceCard,
+    ServiceGrid,
+} from './extensions';
 import { Toolbar } from './toolbar';
 
 interface TiptapEditorProps {
@@ -37,8 +51,13 @@ export function TiptapEditor({
         extensions: [
             StarterKit.configure({
                 heading: {
-                    levels: [1, 2, 3],
+                    levels: [1, 2, 3, 4],
                 },
+            }),
+            TextStyle,
+            Color,
+            TextAlign.configure({
+                types: ['heading', 'paragraph'],
             }),
             Link.configure({
                 openOnClick: false,
@@ -71,6 +90,15 @@ export function TiptapEditor({
             Placeholder.configure({
                 placeholder: placeholder || t('Start writing...'),
             }),
+            ContentWrapper,
+            ServiceGrid,
+            ServiceCard,
+            Callout,
+            IconList,
+            IconListItem,
+            FeatureIcon,
+            FeatureIconWrapper,
+            InlineSvg,
         ],
         content,
         editorProps: {
@@ -78,11 +106,18 @@ export function TiptapEditor({
                 class: cn(
                     'prose prose-sm sm:prose-base dark:prose-invert max-w-none focus:outline-none min-h-[200px] p-4',
                     '[&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6',
+                    '[&_ul.list-none]:list-none [&_ul.list-none]:pl-0',
                     '[&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mb-4',
                     '[&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mb-3',
                     '[&_h3]:text-lg [&_h3]:font-medium [&_h3]:mb-2',
+                    '[&_h4]:text-base [&_h4]:font-medium [&_h4]:mb-2',
                     '[&_blockquote]:border-l-4 [&_blockquote]:border-primary/50 [&_blockquote]:pl-4 [&_blockquote]:italic',
                     '[&_p]:mb-2',
+                    '[&_[data-type="callout"]]:mt-4 [&_[data-type="callout"]]:p-4 [&_[data-type="callout"]]:bg-gray-50 [&_[data-type="callout"]]:rounded-xl [&_[data-type="callout"]]:border-l-4 [&_[data-type="callout"]]:border-pink-400 [&_[data-type="callout"]]:italic',
+                    '[&_[data-variant]]:p-4 [&_[data-variant]]:rounded-xl [&_[data-variant]]:mb-2',
+                    '[&_[data-variant="pink"]]:bg-pink-50/50 [&_[data-variant="pink"]]:border [&_[data-variant="pink"]]:border-pink-100',
+                    '[&_[data-variant="white"]]:bg-white [&_[data-variant="white"]]:shadow-sm [&_[data-variant="white"]]:border [&_[data-variant="white"]]:border-gray-100',
+                    '[&_[data-variant="gray"]]:bg-gray-50',
                     editorClassName,
                 ),
             },
