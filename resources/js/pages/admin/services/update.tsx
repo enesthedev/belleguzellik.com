@@ -1,13 +1,13 @@
-import CreateService from '@/actions/App/Actions/Admin/Services/CreateService';
-import ShowCreateService from '@/actions/App/Actions/Admin/Services/ShowCreateService';
 import ShowServices from '@/actions/App/Actions/Admin/Services/ShowServices';
+import ShowUpdateService from '@/actions/App/Actions/Admin/Services/ShowUpdateService';
+import UpdateService from '@/actions/App/Actions/Admin/Services/UpdateService';
 import UploadContentImage from '@/actions/App/Actions/Admin/Services/UploadContentImage';
 import HeadingSmall from '@/components/heading-small';
 import { TiptapEditor } from '@/components/tiptap/tiptap-editor';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useSidebarCount } from '@/hooks/use-sidebar-count';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { ArrowLeft, Upload } from 'lucide-react';
@@ -16,10 +16,25 @@ import { useTranslation } from 'react-i18next';
 import { v4 as uuidv4 } from 'uuid';
 import Layout from '../layout';
 
-export default function CreateServicePage() {
+interface Service {
+    id: number;
+    name: string;
+    description: string | null;
+    content: string | null;
+    price: string;
+    duration: number;
+    slug: string;
+    is_active: boolean;
+    image_url: string | null;
+}
+
+interface Props {
+    service: Service;
+}
+
+export default function EditServicePage({ service }: Props) {
     const { t } = useTranslation();
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const { refetch } = useSidebarCount();
 
     const sessionKey = useMemo(() => uuidv4(), []);
 
@@ -29,27 +44,25 @@ export default function CreateServicePage() {
             href: ShowServices.url(),
         },
         {
-            title: t('Add New Service'),
-            href: ShowCreateService.url(),
+            title: t('Edit Service'),
+            href: ShowUpdateService.url({ service: service.slug }),
         },
     ];
 
-    const { data, setData, post, processing, errors } = useForm({
-        name: '',
-        description: '',
-        content: '',
-        price: '',
-        duration: '',
+    const { data, setData, put, processing, errors } = useForm({
+        name: service.name,
+        description: service.description || '',
+        content: service.content || '',
+        price: service.price,
+        duration: service.duration.toString(),
+        is_active: service.is_active,
         image: null as File | null,
         session_key: sessionKey,
     });
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        post(CreateService.url(), {
-            onSuccess: () => {
-                refetch();
-            },
+        put(UpdateService.url(service.slug), {
             forceFormData: true,
         });
     };
@@ -61,7 +74,7 @@ export default function CreateServicePage() {
 
     return (
         <Layout breadcrumbs={breadcrumbs}>
-            <Head title={t('Add New Service')} />
+            <Head title={t('Edit Service')} />
 
             <div className="space-y-6">
                 <div className="flex items-center gap-4">
@@ -71,8 +84,8 @@ export default function CreateServicePage() {
                         </Link>
                     </Button>
                     <HeadingSmall
-                        title={t('Add New Service')}
-                        description={t('Add a new service to your salon')}
+                        title={t('Edit Service')}
+                        description={t('Update service information')}
                     />
                 </div>
 
@@ -170,8 +183,37 @@ export default function CreateServicePage() {
                         </div>
                     </div>
 
+                    <div className="flex items-center gap-3 rounded-lg border p-3">
+                        <Checkbox
+                            id="is-active"
+                            checked={data.is_active}
+                            onCheckedChange={(checked) =>
+                                setData('is_active', checked === true)
+                            }
+                        />
+                        <div className="space-y-0.5">
+                            <Label htmlFor="is-active">
+                                {t('Active Status')}
+                            </Label>
+                            <p className="text-sm text-muted-foreground">
+                                {t(
+                                    'When inactive, this service will not be displayed',
+                                )}
+                            </p>
+                        </div>
+                    </div>
+
                     <div className="grid gap-2">
                         <Label>{t('Image')}</Label>
+                        {service.image_url && !data.image && (
+                            <div className="mb-2">
+                                <img
+                                    src={service.image_url}
+                                    alt={service.name}
+                                    className="h-20 w-auto rounded-md object-cover"
+                                />
+                            </div>
+                        )}
                         <div className="flex items-center gap-2">
                             <input
                                 ref={fileInputRef}
@@ -189,7 +231,7 @@ export default function CreateServicePage() {
                                 <Upload className="mr-2 size-4" />
                                 {data.image
                                     ? data.image.name
-                                    : t('Choose Image')}
+                                    : t('Choose New Image')}
                             </Button>
                             {data.image && (
                                 <Button
@@ -211,7 +253,7 @@ export default function CreateServicePage() {
 
                     <div className="flex items-center gap-4">
                         <Button type="submit" disabled={processing}>
-                            {processing ? t('Saving...') : t('Save Service')}
+                            {processing ? t('Saving...') : t('Update Service')}
                         </Button>
                         <Button variant="outline" asChild>
                             <Link href={ShowServices.url()}>{t('Cancel')}</Link>

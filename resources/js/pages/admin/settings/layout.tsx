@@ -1,9 +1,8 @@
+import ShowUpdateProfile from '@/actions/App/Actions/Admin/Settings/ShowUpdateProfile';
 import Heading from '@/components/heading';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { cn, isSameUrl, resolveUrl } from '@/lib/utils';
-import { edit } from '@/routes/profile';
-import { edit as editPassword } from '@/routes/user-password';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import { type PropsWithChildren } from 'react';
@@ -15,12 +14,12 @@ export default function Layout({ children }: PropsWithChildren) {
     const sidebarNavItems: NavItem[] = [
         {
             title: t('Profile'),
-            href: edit(),
+            href: ShowUpdateProfile.url(),
             icon: null,
         },
         {
             title: t('Password'),
-            href: editPassword(),
+            href: '/admin/settings/password',
             icon: null,
         },
     ];

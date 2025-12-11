@@ -1,3 +1,4 @@
+import CreateComment from '@/actions/App/Actions/Admin/Comments/CreateComment';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -9,7 +10,7 @@ import {
     SheetHeader,
     SheetTitle,
 } from '@/components/ui/sheet';
-import { useSidebarCount } from '@/contexts/sidebar-count-context';
+import { useSidebarCount } from '@/hooks/use-sidebar-count';
 import { useForm } from '@inertiajs/react';
 import { Star, Upload } from 'lucide-react';
 import { type ChangeEvent, type FormEvent, useRef } from 'react';
@@ -34,7 +35,7 @@ export function CreateCommentSheet({ open, onOpenChange }: Props) {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        post('/admin/comments', {
+        post(CreateComment.url(), {
             onSuccess: () => {
                 reset();
                 onOpenChange(false);

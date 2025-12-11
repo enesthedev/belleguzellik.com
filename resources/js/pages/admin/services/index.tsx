@@ -1,3 +1,5 @@
+import ShowCreateService from '@/actions/App/Actions/Admin/Services/ShowCreateService';
+import ShowServices from '@/actions/App/Actions/Admin/Services/ShowServices';
 import { Button } from '@/components/ui/button';
 import {
     Empty,
@@ -7,7 +9,6 @@ import {
     EmptyMedia,
     EmptyTitle,
 } from '@/components/ui/empty';
-import admin from '@/routes/admin';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
 import { Plus, Scissors } from 'lucide-react';
@@ -30,7 +31,7 @@ export default function ServicesIndex({ services }: Props) {
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: t('Services'),
-            href: admin.services.index().url,
+            href: ShowServices.url(),
         },
     ];
 
@@ -55,7 +56,7 @@ export default function ServicesIndex({ services }: Props) {
             <div className="flex flex-col gap-6">
                 <div className="flex items-center justify-between">
                     <Button size="sm" asChild>
-                        <Link href={admin.services.create().url}>
+                        <Link href={ShowCreateService.url()}>
                             <Plus className="mr-1.5 size-3.5" />
                             {t('Add Service')}
                         </Link>

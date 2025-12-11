@@ -1,22 +1,12 @@
+import ShowUpdateService from '@/actions/App/Actions/Admin/Services/ShowUpdateService';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import admin from '@/routes/admin';
+import { type Service } from '@/types/models';
 import { Link } from '@inertiajs/react';
 import { ColumnDef } from '@tanstack/react-table';
 import { Clock, Edit, Trash2 } from 'lucide-react';
 
-export interface Service {
-    id: number;
-    name: string;
-    slug: string;
-    description: string | null;
-    content: string | null;
-    price: string;
-    duration: number;
-    is_active: boolean;
-    image_url: string | null;
-    created_at: string;
-}
+export type { Service };
 
 interface ColumnsProps {
     onDelete: (id: number) => void;
@@ -107,7 +97,11 @@ export function getColumns({
                             className="size-8 text-muted-foreground hover:text-primary"
                             asChild
                         >
-                            <Link href={admin.services.edit(service.slug).url}>
+                            <Link
+                                href={ShowUpdateService.url({
+                                    service: service.slug,
+                                })}
+                            >
                                 <span className="sr-only">{t('Edit')}</span>
                                 <Edit className="size-4" />
                             </Link>

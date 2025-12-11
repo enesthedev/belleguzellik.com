@@ -9,7 +9,7 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { useSidebarCount } from '@/contexts/sidebar-count-context';
+import { useSidebarCount } from '@/hooks/use-sidebar-count';
 import { router } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
@@ -60,4 +60,3 @@ export function DeleteServiceDialog({ open, onOpenChange, serviceId }: Props) {
         </AlertDialog>
     );
 }
-

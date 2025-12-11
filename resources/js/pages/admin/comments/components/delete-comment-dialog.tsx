@@ -1,3 +1,4 @@
+import DeleteComment from '@/actions/App/Actions/Admin/Comments/DeleteComment';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -8,7 +9,7 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
-import { useSidebarCount } from '@/contexts/sidebar-count-context';
+import { useSidebarCount } from '@/hooks/use-sidebar-count';
 import { router } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
@@ -24,7 +25,7 @@ export function DeleteCommentDialog({ open, onOpenChange, commentId }: Props) {
 
     const handleDelete = () => {
         if (commentId) {
-            router.delete(`/admin/comments/${commentId}`, {
+            router.delete(DeleteComment.url(commentId), {
                 onSuccess: () => {
                     refetch();
                     onOpenChange(false);

@@ -1,3 +1,6 @@
+import ShowComments from '@/actions/App/Actions/Admin/Comments/ShowComments';
+import ShowServices from '@/actions/App/Actions/Admin/Services/ShowServices';
+import ShowOverview from '@/actions/App/Actions/Admin/ShowOverview';
 import AppLogo from '@/components/app-logo';
 import {
     Sidebar,
@@ -9,11 +12,7 @@ import {
     SidebarRail,
     SidebarSeparator,
 } from '@/components/ui/sidebar';
-import {
-    SidebarCountProvider,
-    useSidebarCount,
-} from '@/contexts/sidebar-count-context';
-import admin from '@/routes/admin';
+import { useSidebarCount } from '@/hooks/use-sidebar-count';
 import { SharedData, type BreadcrumbItem } from '@/types';
 import type { NavGroup } from '@/types/nav';
 import { Link, usePage } from '@inertiajs/react';
@@ -40,7 +39,7 @@ function LayoutContent({
             items: [
                 {
                     title: t('Overview'),
-                    url: admin.overview().url,
+                    url: ShowOverview.url(),
                     icon: LayoutDashboard,
                     exactMatch: true,
                 },
@@ -53,13 +52,13 @@ function LayoutContent({
             items: [
                 {
                     title: t('Comments'),
-                    url: admin.comments.index().url,
+                    url: ShowComments.url(),
                     icon: MessageSquare,
                     badge: counts?.comments,
                 },
                 {
                     title: t('Services'),
-                    url: admin.services.index().url,
+                    url: ShowServices.url(),
                     icon: Scissors,
                     badge: counts?.services,
                 },
@@ -74,7 +73,7 @@ function LayoutContent({
                     <SidebarMenu>
                         <SidebarMenuItem>
                             <div className="flex">
-                                <Link href={admin.overview().url} prefetch>
+                                <Link href={ShowOverview.url()} prefetch>
                                     <AppLogo />
                                 </Link>
                             </div>
@@ -113,9 +112,5 @@ export default function Layout(
         className?: string;
     }>,
 ) {
-    return (
-        <SidebarCountProvider>
-            <LayoutContent {...props} />
-        </SidebarCountProvider>
-    );
+    return <LayoutContent {...props} />;
 }

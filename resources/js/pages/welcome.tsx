@@ -1,5 +1,5 @@
-import ShowServiceDetailPage from '@/actions/App/Actions/Services/ShowServiceDetailPage';
-import ShowServicesPage from '@/actions/App/Actions/Services/ShowServicesPage';
+import ShowService from '@/actions/App/Actions/ShowService';
+import ShowServices from '@/actions/App/Actions/ShowServices';
 import AppLogoIcon from '@/components/app-logo-icon';
 import {
     Carousel,
@@ -148,7 +148,9 @@ export default function Welcome({ comments, services }: Props) {
                             {services.map((service) => (
                                 <Link
                                     key={service.id}
-                                    href={ShowServiceDetailPage.url(service.slug)}
+                                    href={ShowService.url({
+                                        service: service.slug,
+                                    })}
                                     className="group relative overflow-hidden rounded-2xl border border-stone-200/60 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-amber-200/60"
                                 >
                                     <div className="aspect-[4/3] overflow-hidden">
@@ -208,7 +210,7 @@ export default function Welcome({ comments, services }: Props) {
 
                         <div className="mt-10 text-center">
                             <Link
-                                href={ShowServicesPage.url()}
+                                href={ShowServices.url()}
                                 className="inline-flex items-center gap-2 rounded-full border border-amber-600 bg-amber-600 px-8 py-3 font-medium text-white shadow-lg shadow-amber-200/50 transition-all hover:bg-amber-700 hover:shadow-xl"
                             >
                                 {t('View All Services')}

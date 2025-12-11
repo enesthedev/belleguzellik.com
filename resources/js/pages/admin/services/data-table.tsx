@@ -26,6 +26,8 @@ export function DataTable<TData, TValue>({
     columns,
     data,
 }: DataTableProps<TData, TValue>) {
+    'use no memo';
+
     const { t } = useTranslation();
 
     const table = useReactTable({
