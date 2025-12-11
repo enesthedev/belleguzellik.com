@@ -1,6 +1,7 @@
 import ShowService from '@/actions/App/Actions/ShowService';
 import ShowServices from '@/actions/App/Actions/ShowServices';
 import AppLogoIcon from '@/components/app-logo-icon';
+import { SEOHead } from '@/components/seo-head';
 import {
     Carousel,
     CarouselContent,
@@ -9,7 +10,7 @@ import {
     CarouselPrevious,
     type CarouselApi,
 } from '@/components/ui/carousel';
-import { Head, Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import Autoplay from 'embla-carousel-autoplay';
 import { ArrowRight, Clock, MapPin, Phone, Quote } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
@@ -42,6 +43,10 @@ interface Service {
 interface Props {
     comments: Comment[];
     services: Service[];
+    seo: {
+        title: string;
+        description: string;
+    };
 }
 
 function getInitials(name: string): string {
@@ -53,7 +58,7 @@ function getInitials(name: string): string {
         .slice(0, 2);
 }
 
-export default function Welcome({ comments, services }: Props) {
+export default function Welcome({ comments, services, seo }: Props) {
     const { t } = useTranslation();
 
     const [api, setApi] = useState<CarouselApi>();
@@ -100,7 +105,7 @@ export default function Welcome({ comments, services }: Props) {
 
     return (
         <Layout>
-            <Head title={t('Welcome')} />
+            <SEOHead title={seo.title} description={seo.description} />
 
             <Section id="hero" ariaLabel={t('Home Page')} className="relative">
                 <VideoBackground />

@@ -19,6 +19,7 @@
         "laravel/wayfinder": "^0.1.9",
         "spatie/laravel-google-fonts": "^1.4",
         "spatie/laravel-medialibrary": "^11.17",
+        "spatie/laravel-robots-middleware": "^1.4",
         "spatie/laravel-sitemap": "^7.3",
         "spatie/laravel-sluggable": "^3.7"
     },

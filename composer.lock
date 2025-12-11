@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0acf025ddfe0e5912963200f0740ecc",
+    "content-hash": "ea80dbdf37d3bb544f3ac3203de299ce",
     "packages": [
         {
             "name": "archtechx/enums",
@@ -6279,6 +6279,66 @@
                 }
             ],
             "time": "2025-07-17T15:46:43+00:00"
+        },
+        {
+            "name": "spatie/laravel-robots-middleware",
+            "version": "1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-robots-middleware.git",
+                "reference": "807a9693b34bcd3ce7a1d9c40e4f11516f005248"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-robots-middleware/zipball/807a9693b34bcd3ce7a1d9c40e4f11516f005248",
+                "reference": "807a9693b34bcd3ce7a1d9c40e4f11516f005248",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "^10|^11.0|^12.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^8.0|^9.0|^10.0",
+                "phpunit/phpunit": "^9.4|^10.5|^11.5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\RobotsMiddleware\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian De Deyne",
+                    "email": "sebastian@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Add an `all` or `none` robots header to your requests via a middleware in Laravel",
+            "homepage": "https://github.com/spatie/laravel-robots-middleware",
+            "keywords": [
+                "index",
+                "robots",
+                "seo",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-robots-middleware/issues",
+                "source": "https://github.com/spatie/laravel-robots-middleware/tree/1.4.1"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                }
+            ],
+            "time": "2025-02-21T14:12:29+00:00"
         },
         {
             "name": "spatie/laravel-sitemap",

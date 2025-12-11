@@ -34,6 +34,11 @@ class ShowService
                 'image_url' => $service->image_url,
             ],
             'relatedServices' => $relatedServices,
+            'seo' => [
+                'title' => $service->name,
+                'description' => $service->description ?: __('seo.service.description_template', ['name' => $service->name]),
+                'image' => $service->image_url,
+            ],
         ]);
     }
 }

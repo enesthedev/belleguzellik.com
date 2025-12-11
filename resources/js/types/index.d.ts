@@ -27,6 +27,8 @@ type SharedData = {
     auth: Auth;
     sidebarOpen: boolean;
     locale: string;
+    app_url: string;
+    current_url: string;
     counts?: {
         comments: number;
         services: number;

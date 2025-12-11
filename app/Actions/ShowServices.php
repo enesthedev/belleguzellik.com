@@ -24,6 +24,10 @@ class ShowServices
 
         return Inertia::render('services/index', [
             'services' => $services,
+            'seo' => [
+                'title' => __('seo.services.title'),
+                'description' => __('seo.services.description'),
+            ],
         ]);
     }
 }

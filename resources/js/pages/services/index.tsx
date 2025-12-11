@@ -1,6 +1,7 @@
 import ShowService from '@/actions/App/Actions/ShowService';
+import { SEOHead } from '@/components/seo-head';
 import { Service } from '@/types';
-import { Head, Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import { ArrowRight, Clock } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,9 +9,13 @@ import Layout from './layout';
 
 interface Props {
     services: Service[];
+    seo: {
+        title: string;
+        description: string;
+    };
 }
 
-export default function ServicesIndex({ services }: Props) {
+export default function ServicesIndex({ services, seo }: Props) {
     const { t } = useTranslation();
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -20,7 +25,7 @@ export default function ServicesIndex({ services }: Props) {
 
     return (
         <Layout>
-            <Head title={t('Our Services')} />
+            <SEOHead title={seo.title} description={seo.description} />
 
             <div className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-16">
                 <header className="mb-10 text-center">

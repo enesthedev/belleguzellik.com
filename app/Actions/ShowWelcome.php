@@ -43,6 +43,10 @@ class ShowWelcome
             'canRegister' => Features::enabled(Features::registration()),
             'comments' => $comments,
             'services' => $services,
+            'seo' => [
+                'title' => __('seo.home.title'),
+                'description' => __('seo.home.description'),
+            ],
         ]);
     }
 }

@@ -1,7 +1,8 @@
 import ShowService from '@/actions/App/Actions/ShowService';
+import { SEOHead } from '@/components/seo-head';
 import { TiptapRenderer } from '@/components/tiptap/tiptap-renderer';
 import { Service } from '@/types/models';
-import { Head, Link } from '@inertiajs/react';
+import { Link } from '@inertiajs/react';
 import { ArrowRight, Clock } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import Layout from './layout';
@@ -9,14 +10,24 @@ import Layout from './layout';
 interface Props {
     service: Service;
     relatedServices: Service[];
+    seo: {
+        title: string;
+        description: string;
+        image?: string | null;
+    };
 }
 
-export default function ServiceShow({ service, relatedServices }: Props) {
+export default function ServiceShow({ service, relatedServices, seo }: Props) {
     const { t } = useTranslation();
 
     return (
         <Layout>
-            <Head title={service.name} />
+            <SEOHead
+                title={seo.title}
+                description={seo.description}
+                image={seo.image}
+                type="article"
+            />
 
             <article className="mx-auto pb-12">
                 {service.image_url && (
