@@ -12,8 +12,8 @@ import HeadingSmall from '@/components/heading-small';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { edit } from '@/routes/user-password';
 
+import ShowUpdatePassword from '@/actions/App/Actions/Admin/Settings/ShowUpdatePassword';
 import UpdatePassword from '@/actions/App/Actions/Admin/Settings/UpdatePassword';
 import Layout from './layout';
 
@@ -25,7 +25,7 @@ export default function Password() {
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: t('Password settings'),
-            href: edit().url,
+            href: ShowUpdatePassword.url(),
         },
     ];
 

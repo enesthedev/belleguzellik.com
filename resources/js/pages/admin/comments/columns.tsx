@@ -1,17 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+import { type Comment } from '@/types/models';
 import { ColumnDef } from '@tanstack/react-table';
 import { Eye, Star, Trash2 } from 'lucide-react';
 
-export interface Comment {
-    id: number;
-    author: string;
-    content: string;
-    rating: number;
-    is_active: boolean;
-    avatar_url: string | null;
-    created_at: string;
-}
+export type { Comment };
 
 interface ColumnsProps {
     onDelete: (id: number) => void;

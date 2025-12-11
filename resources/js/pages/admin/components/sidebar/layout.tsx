@@ -1,3 +1,6 @@
+import ShowComments from '@/actions/App/Actions/Admin/Comments/ShowComments';
+import ShowServices from '@/actions/App/Actions/Admin/Services/ShowServices';
+import ShowOverview from '@/actions/App/Actions/Admin/ShowOverview';
 import AppLogo from '@/components/app-logo';
 import {
     Sidebar,
@@ -9,20 +12,11 @@ import {
     SidebarRail,
     SidebarSeparator,
 } from '@/components/ui/sidebar';
-import {
-    CommentsCountProvider,
-    useCommentsCount,
-} from '@/contexts/comments-count-context';
-import admin from '@/routes/admin';
+import { useSidebarCount } from '@/hooks/use-sidebar-count';
 import { SharedData, type BreadcrumbItem } from '@/types';
 import type { NavGroup } from '@/types/nav';
 import { Link, usePage } from '@inertiajs/react';
-import {
-    FileText,
-    LayoutDashboard,
-    MessageSquare,
-    Scissors,
-} from 'lucide-react';
+import { LayoutDashboard, MessageSquare, Scissors } from 'lucide-react';
 import { type PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Content } from '../shell/content';
@@ -38,14 +32,14 @@ function LayoutContent({
 }: PropsWithChildren<{ breadcrumbs?: BreadcrumbItem[]; className?: string }>) {
     const { auth } = usePage<SharedData>().props;
     const { t } = useTranslation();
-    const { count: commentsCount } = useCommentsCount();
+    const { counts } = useSidebarCount();
 
     const navigationGroups: NavGroup[] = [
         {
             items: [
                 {
                     title: t('Overview'),
-                    url: admin.overview().url,
+                    url: ShowOverview.url(),
                     icon: LayoutDashboard,
                     exactMatch: true,
                 },
@@ -58,21 +52,15 @@ function LayoutContent({
             items: [
                 {
                     title: t('Comments'),
-                    url: admin.comments.index().url,
+                    url: ShowComments.url(),
                     icon: MessageSquare,
-                    badge: commentsCount,
+                    badge: counts?.comments,
                 },
                 {
                     title: t('Services'),
-                    url: '/admin/services',
+                    url: ShowServices.url(),
                     icon: Scissors,
-                    badge: 5,
-                },
-                {
-                    title: t('Posts'),
-                    url: '/admin/posts',
-                    icon: FileText,
-                    badge: 2,
+                    badge: counts?.services,
                 },
             ],
         },
@@ -85,7 +73,7 @@ function LayoutContent({
                     <SidebarMenu>
                         <SidebarMenuItem>
                             <div className="flex">
-                                <Link href={admin.overview().url} prefetch>
+                                <Link href={ShowOverview.url()} prefetch>
                                     <AppLogo />
                                 </Link>
                             </div>
@@ -124,9 +112,5 @@ export default function Layout(
         className?: string;
     }>,
 ) {
-    return (
-        <CommentsCountProvider>
-            <LayoutContent {...props} />
-        </CommentsCountProvider>
-    );
+    return <LayoutContent {...props} />;
 }

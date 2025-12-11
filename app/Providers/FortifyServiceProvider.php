@@ -17,7 +17,7 @@ class FortifyServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        //
+        Fortify::ignoreRoutes();
     }
 
     public function boot(): void
@@ -29,8 +29,8 @@ class FortifyServiceProvider extends ServiceProvider
 
     private function configureActions(): void
     {
-        Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
-        Fortify::createUsersUsing(CreateNewUser::class);
+        // Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
+        // Fortify::createUsersUsing(CreateNewUser::class);
     }
 
     private function configureViews(): void
@@ -44,9 +44,9 @@ class FortifyServiceProvider extends ServiceProvider
 
     private function configureRateLimiting(): void
     {
-        RateLimiter::for('two-factor', function (Request $request) {
+        /*RateLimiter::for('two-factor', function (Request $request) {
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
-        });
+        });*/
 
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());

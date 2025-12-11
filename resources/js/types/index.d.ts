@@ -1,15 +1,17 @@
 import { LucideIcon } from 'lucide-react';
 
-export interface Auth {
-    user: User;
-}
+export type { Comment, Service, TemporaryUpload, User } from './models';
 
-export interface BreadcrumbItem {
+type Auth = {
+    user: User;
+};
+
+type BreadcrumbItem = {
     title: string;
     href: string;
-}
+};
 
-export interface NavItem {
+type NavItem = {
     title: string;
     url?: string;
     /** @deprecated Use `url` instead. Kept for backward compatibility */
@@ -17,25 +19,21 @@ export interface NavItem {
     icon?: LucideIcon | null;
     badge?: string | number;
     items?: NavItem[];
-}
+};
 
-export interface SharedData {
+type SharedData = {
     name: string;
     quote: { message: string; author: string };
     auth: Auth;
     sidebarOpen: boolean;
     locale: string;
+    app_url: string;
+    current_url: string;
+    counts?: {
+        comments: number;
+        services: number;
+    };
     [key: string]: unknown;
-}
+};
 
-export interface User {
-    id: number;
-    name: string;
-    email: string;
-    avatar?: string;
-    email_verified_at: string | null;
-    two_factor_enabled?: boolean;
-    created_at: string;
-    updated_at: string;
-    [key: string]: unknown; // This allows for additional properties...
-}
+export type { Auth, BreadcrumbItem, NavItem, SharedData };

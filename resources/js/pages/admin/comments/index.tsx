@@ -1,3 +1,4 @@
+import ShowComments from '@/actions/App/Actions/Admin/Comments/ShowComments';
 import { Button } from '@/components/ui/button';
 import {
     Empty,
@@ -34,7 +35,7 @@ export default function CommentsIndex({ comments }: Props) {
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: t('Comments'),
-            href: '/admin/comments',
+            href: ShowComments.url(),
         },
     ];
 

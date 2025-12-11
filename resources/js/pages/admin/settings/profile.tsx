@@ -3,15 +3,14 @@ import { Transition } from '@headlessui/react';
 import { Form, Head, Link, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
+import ShowUpdateProfile from '@/actions/App/Actions/Admin/Settings/ShowUpdateProfile';
 import UpdateProfile from '@/actions/App/Actions/Admin/Settings/UpdateProfile';
 import InputError from '@/components/forms/input-error';
 import HeadingSmall from '@/components/heading-small';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import DeleteUserDialog from '@/pages/admin/components/dialog/delete-user-dialog';
 import AdminLayout from '@/pages/admin/layout';
-import { edit } from '@/routes/profile';
 import Layout from './layout';
 
 export default function Profile({
@@ -27,7 +26,7 @@ export default function Profile({
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: t('Profile settings'),
-            href: edit().url,
+            href: ShowUpdateProfile.url(),
         },
     ];
 
@@ -145,8 +144,6 @@ export default function Profile({
                         )}
                     </Form>
                 </div>
-
-                <DeleteUserDialog />
             </Layout>
         </AdminLayout>
     );

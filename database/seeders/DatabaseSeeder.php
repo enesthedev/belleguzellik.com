@@ -24,6 +24,9 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        $this->call(CommentSeeder::class);
+        $this->call([
+            CommentSeeder::class,
+            ServiceSeeder::class,
+        ]);
     }
 }
