@@ -1,7 +1,7 @@
 import ShowService from '@/actions/App/Actions/ShowService';
 import { Service } from '@/types';
 import { Head, Link } from '@inertiajs/react';
-import { ArrowRight, Clock, Search } from 'lucide-react';
+import { ArrowRight, Clock } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Layout from './layout';
@@ -34,20 +34,7 @@ export default function ServicesIndex({ services }: Props) {
                     </p>
                 </header>
 
-                <div className="mb-8">
-                    <div className="relative mx-auto max-w-md">
-                        <Search className="absolute top-1/2 left-4 size-5 -translate-y-1/2 text-stone-400" />
-                        <input
-                            type="text"
-                            placeholder={t('Search services...')}
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full rounded-full border border-stone-200 bg-white py-3 pr-4 pl-12 text-stone-800 shadow-sm transition-all placeholder:text-stone-400 focus:border-amber-300 focus:ring-2 focus:ring-amber-100 focus:outline-none"
-                        />
-                    </div>
-                </div>
-
-                {filteredServices.length === 0 ? (
+                {services.length === 0 ? (
                     <div className="py-16 text-center">
                         <p className="text-lg text-stone-500">
                             {t('No services found')}
