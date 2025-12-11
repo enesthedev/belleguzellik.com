@@ -16,14 +16,15 @@ declare module '@tiptap/core' {
 }
 
 const variantClasses: Record<CardVariant, string> = {
-    pink: 'bg-pink-50/50 p-6 rounded-2xl border border-pink-100',
-    white: 'text-center p-6 bg-white shadow-sm rounded-xl border border-gray-100',
-    gray: 'bg-gray-50 rounded-2xl p-8',
+    pink: 'bg-pink-50/50 p-4 md:p-6 rounded-2xl border border-pink-100 h-full',
+    white: 'text-center p-4 md:p-6 bg-white shadow-sm rounded-xl border border-gray-100 h-full',
+    gray: 'bg-gray-50 rounded-2xl p-6 md:p-8 h-full',
 };
 
 function detectVariant(className: string): CardVariant {
     if (className.includes('bg-pink-50')) return 'pink';
-    if (className.includes('bg-white') || className.includes('shadow-sm')) return 'white';
+    if (className.includes('bg-white') || className.includes('shadow-sm'))
+        return 'white';
     if (className.includes('bg-gray-50')) return 'gray';
     return 'pink';
 }
@@ -104,11 +105,18 @@ export const ServiceCard = Node.create<ServiceCardOptions>({
                             {
                                 type: 'heading',
                                 attrs: { level: 3 },
-                                content: [{ type: 'text', text: 'Kart Başlığı' }],
+                                content: [
+                                    { type: 'text', text: 'Kart Başlığı' },
+                                ],
                             },
                             {
                                 type: 'paragraph',
-                                content: [{ type: 'text', text: 'Kart içeriği buraya gelecek...' }],
+                                content: [
+                                    {
+                                        type: 'text',
+                                        text: 'Kart içeriği buraya gelecek...',
+                                    },
+                                ],
                             },
                         ],
                     });
@@ -124,4 +132,3 @@ export const ServiceCard = Node.create<ServiceCardOptions>({
         };
     },
 });
-

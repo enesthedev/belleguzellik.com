@@ -52,7 +52,10 @@ export const ServiceGrid = Node.create<ServiceGridOptions>({
                 getAttrs: (element) => {
                     const el = element as HTMLElement;
                     const className = el.getAttribute('class') || '';
-                    if (className.includes('grid') && className.includes('grid-cols')) {
+                    if (
+                        className.includes('grid') &&
+                        className.includes('grid-cols')
+                    ) {
                         return { class: className };
                     }
                     return false;
@@ -63,7 +66,13 @@ export const ServiceGrid = Node.create<ServiceGridOptions>({
 
     renderHTML({ node, HTMLAttributes }) {
         const cols = node.attrs.cols as number;
-        const baseClass = `my-8 grid grid-cols-1 md:grid-cols-${cols} gap-${cols === 3 ? '6' : '8'}`;
+        // Mobil: 1 sütun, Tablet (md): 2 sütun, Masaüstü (lg): Belirtilen sütun sayısı (eğer 3 ise)
+        const gridClass =
+            cols === 3
+                ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+                : 'grid-cols-1 md:grid-cols-2';
+
+        const baseClass = `my-8 grid ${gridClass} gap-6 md:gap-${cols === 3 ? '6' : '8'}`;
 
         return [
             'div',
@@ -79,47 +88,36 @@ export const ServiceGrid = Node.create<ServiceGridOptions>({
             insertGrid:
                 (cols: 2 | 3) =>
                 ({ commands }) => {
-                    return commands.insertContent({
-                        type: this.name,
-                        attrs: {
-                            cols,
-                            class: `my-8 grid grid-cols-1 md:grid-cols-${cols} gap-${cols === 3 ? '6' : '8'}`,
-                        },
+                    const cards = Array.from({ length: cols }, () => ({
+                        type: 'serviceCard',
+                        attrs: { variant: 'pink' },
                         content: [
                             {
-                                type: 'serviceCard',
-                                attrs: { variant: 'pink' },
-                                content: [
-                                    {
-                                        type: 'heading',
-                                        attrs: { level: 3 },
-                                        content: [{ type: 'text', text: 'Başlık' }],
-                                    },
-                                    {
-                                        type: 'paragraph',
-                                        content: [{ type: 'text', text: 'İçerik buraya gelecek...' }],
-                                    },
-                                ],
+                                type: 'heading',
+                                attrs: { level: 3 },
+                                content: [{ type: 'text', text: 'Başlık' }],
                             },
                             {
-                                type: 'serviceCard',
-                                attrs: { variant: 'pink' },
+                                type: 'paragraph',
                                 content: [
                                     {
-                                        type: 'heading',
-                                        attrs: { level: 3 },
-                                        content: [{ type: 'text', text: 'Başlık' }],
-                                    },
-                                    {
-                                        type: 'paragraph',
-                                        content: [{ type: 'text', text: 'İçerik buraya gelecek...' }],
+                                        type: 'text',
+                                        text: 'İçerik buraya gelecek...',
                                     },
                                 ],
                             },
                         ],
+                    }));
+
+                    return commands.insertContent({
+                        type: this.name,
+                        attrs: {
+                            cols,
+                            class: `my-8 grid ${cols === 3 ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 md:grid-cols-2'} gap-6 md:gap-${cols === 3 ? '6' : '8'}`,
+                        },
+                        content: cards,
                     });
                 },
         };
     },
 });
-

@@ -55,14 +55,24 @@ function getInitials(name: string): string {
 
 export default function Welcome({ comments, services }: Props) {
     const { t } = useTranslation();
+
     const [api, setApi] = useState<CarouselApi>();
     const [current, setCurrent] = useState(0);
     const [count, setCount] = useState(0);
+
+    const [servicesApi, setServicesApi] = useState<CarouselApi>();
+    const [servicesCurrent, setServicesCurrent] = useState(0);
+    const [servicesCount, setServicesCount] = useState(0);
 
     const onSelect = useCallback(() => {
         if (!api) return;
         setCurrent(api.selectedScrollSnap());
     }, [api]);
+
+    const onServicesSelect = useCallback(() => {
+        if (!servicesApi) return;
+        setServicesCurrent(servicesApi.selectedScrollSnap());
+    }, [servicesApi]);
 
     useEffect(() => {
         if (!api) return;
@@ -75,6 +85,18 @@ export default function Welcome({ comments, services }: Props) {
             api.off('select', onSelect);
         };
     }, [api, onSelect]);
+
+    useEffect(() => {
+        if (!servicesApi) return;
+
+        setServicesCount(servicesApi.scrollSnapList().length);
+        setServicesCurrent(servicesApi.selectedScrollSnap());
+
+        servicesApi.on('select', onServicesSelect);
+        return () => {
+            servicesApi.off('select', onServicesSelect);
+        };
+    }, [servicesApi, onServicesSelect]);
 
     return (
         <Layout>
@@ -143,53 +165,77 @@ export default function Welcome({ comments, services }: Props) {
                             </p>
                         </header>
 
-                        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                            {services.map((service) => (
-                                <Link
-                                    key={service.id}
-                                    href={ShowService.url({
-                                        service: service.slug,
-                                    })}
-                                    className="group relative overflow-hidden rounded-2xl border border-stone-200/60 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-amber-200/60"
-                                >
-                                    <div className="aspect-[4/3] overflow-hidden">
-                                        {service.image_url ? (
-                                            <img
-                                                src={service.image_url}
-                                                alt={service.name}
-                                                className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                            />
-                                        ) : (
-                                            <div className="flex size-full items-center justify-center bg-gradient-to-br from-amber-100 to-amber-200">
-                                                <span className="text-4xl font-bold text-amber-600/30">
-                                                    {service.name.charAt(0)}
-                                                </span>
+                        <Carousel
+                            setApi={setServicesApi}
+                            opts={{
+                                align: 'start',
+                                loop: true,
+                            }}
+                            className="mx-auto w-full"
+                        >
+                            <CarouselContent className="-ml-4">
+                                {services.map((service) => (
+                                    <CarouselItem
+                                        key={service.id}
+                                        className="pl-4 sm:basis-1/2 lg:basis-1/3"
+                                    >
+                                        <Link
+                                            href={ShowService.url({
+                                                service: service.slug,
+                                            })}
+                                            className="group relative block h-full overflow-hidden rounded-2xl border border-stone-200/60 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-amber-200/60"
+                                        >
+                                            <div className="aspect-[4/3] overflow-hidden">
+                                                {service.image_url ? (
+                                                    <img
+                                                        src={service.image_url}
+                                                        alt={service.name}
+                                                        className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                                    />
+                                                ) : (
+                                                    <div className="flex size-full items-center justify-center bg-gradient-to-br from-amber-100 to-amber-200">
+                                                        <span className="text-4xl font-bold text-amber-600/30">
+                                                            {service.name.charAt(
+                                                                0,
+                                                            )}
+                                                        </span>
+                                                    </div>
+                                                )}
                                             </div>
-                                        )}
-                                    </div>
 
-                                    <div className="p-5">
-                                        <h3 className="mb-2 text-lg font-semibold text-stone-800 transition-colors group-hover:text-amber-700">
-                                            {service.name}
-                                        </h3>
+                                            <div className="p-5">
+                                                <h3 className="mb-2 text-lg font-semibold text-stone-800 transition-colors group-hover:text-amber-700">
+                                                    {service.name}
+                                                </h3>
 
-                                        {service.description && (
-                                            <p className="mb-4 line-clamp-2 text-sm text-stone-600">
-                                                {service.description}
-                                            </p>
-                                        )}
+                                                {service.description && (
+                                                    <p className="mb-4 line-clamp-2 text-sm text-stone-600">
+                                                        {service.description}
+                                                    </p>
+                                                )}
 
-                                        <div className="flex items-center justify-between">
-                                            <span className="flex items-center gap-1 text-sm text-stone-500">
-                                                <Clock className="size-3.5" />
-                                                {service.duration} {t('min')}
-                                            </span>
-                                            <ArrowRight className="size-5 text-stone-400 transition-all group-hover:translate-x-1 group-hover:text-amber-600" />
-                                        </div>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
+                                                <div className="flex items-center justify-between">
+                                                    <span className="flex items-center gap-1 text-sm text-stone-500">
+                                                        <Clock className="size-3.5" />
+                                                        {service.duration}{' '}
+                                                        {t('min')}
+                                                    </span>
+                                                    <ArrowRight className="size-5 text-stone-400 transition-all group-hover:translate-x-1 group-hover:text-amber-600" />
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    </CarouselItem>
+                                ))}
+                            </CarouselContent>
+
+                            <CarouselPrevious className="hidden border-stone-200 bg-white/90 text-stone-600 shadow-lg backdrop-blur-sm hover:bg-white hover:text-amber-600 md:-left-4 md:flex lg:-left-12" />
+                            <CarouselNext className="hidden border-stone-200 bg-white/90 text-stone-600 shadow-lg backdrop-blur-sm hover:bg-white hover:text-amber-600 md:-right-4 md:flex lg:-right-12" />
+                        </Carousel>
+
+                        <CarouselDots
+                            count={servicesCount}
+                            current={servicesCurrent}
+                        />
 
                         <div className="mt-10 text-center">
                             <Link

@@ -66,8 +66,8 @@ class ServiceSeeder extends Seeder
             Belle Güzellik Merkezi'nde sunduğumuz Profesyonel Cilt Bakımı, cildinizin benzersiz ihtiyaçlarını karşılamak üzere özenle tasarlanmış kapsamlı bir bakım programıdır. Uzman ekibimiz, en son cilt bakım teknolojilerini ve premium ürünleri kullanarak cildinize hak ettiği ışıltıyı geri kazandırır.
         </p>
 
-        <div class="my-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-pink-50/50 p-6 rounded-2xl border border-pink-100">
+        <div class="my-8 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            <div class="bg-pink-50/50 p-4 md:p-6 rounded-2xl border border-pink-100 h-full" data-variant="pink">
                 <h3 class="text-xl font-serif text-pink-900 mb-4 flex items-center">
                     <span class="w-8 h-8 rounded-full bg-pink-200 flex items-center justify-center mr-3 text-sm">01</span>
                     Cilt Analizi
@@ -75,7 +75,7 @@ class ServiceSeeder extends Seeder
                 <p class="text-sm">Özel cihazlarla cildinizin nem, yağ ve elastikiyet seviyelerini ölçerek size özel bir yol haritası çıkarıyoruz.</p>
             </div>
 
-            <div class="bg-pink-50/50 p-6 rounded-2xl border border-pink-100">
+            <div class="bg-pink-50/50 p-4 md:p-6 rounded-2xl border border-pink-100 h-full" data-variant="pink">
                 <h3 class="text-xl font-serif text-pink-900 mb-4 flex items-center">
                     <span class="w-8 h-8 rounded-full bg-pink-200 flex items-center justify-center mr-3 text-sm">02</span>
                     Derin Temizlik
@@ -83,7 +83,7 @@ class ServiceSeeder extends Seeder
                 <p class="text-sm">Gözeneklerinizi tıkayan kirlilik, makyaj kalıntıları ve ölü derilerden cildinizi nazikçe arındırıyoruz.</p>
             </div>
 
-            <div class="bg-pink-50/50 p-6 rounded-2xl border border-pink-100">
+            <div class="bg-pink-50/50 p-4 md:p-6 rounded-2xl border border-pink-100 h-full" data-variant="pink">
                 <h3 class="text-xl font-serif text-pink-900 mb-4 flex items-center">
                     <span class="w-8 h-8 rounded-full bg-pink-200 flex items-center justify-center mr-3 text-sm">03</span>
                     Besleyici Bakım
@@ -91,7 +91,7 @@ class ServiceSeeder extends Seeder
                 <p class="text-sm">Cilt tipinize özel seçilmiş serumlar ve maskelerle cildinizin ihtiyaç duyduğu vitamin ve mineralleri sağlıyoruz.</p>
             </div>
 
-            <div class="bg-pink-50/50 p-6 rounded-2xl border border-pink-100">
+            <div class="bg-pink-50/50 p-4 md:p-6 rounded-2xl border border-pink-100 h-full" data-variant="pink">
                 <h3 class="text-xl font-serif text-pink-900 mb-4 flex items-center">
                     <span class="w-8 h-8 rounded-full bg-pink-200 flex items-center justify-center mr-3 text-sm">04</span>
                     Koruma
@@ -137,8 +137,8 @@ HTML;
             Kalıcı oje uygulamalarımız, tırnaklarınızın hem sağlığını koruyan hem de haftalarca kusursuz görünmesini sağlayan profesyonel bir deneyim sunar. Geniş renk yelpazemiz ve özel nail art tasarımlarımızla tarzınızı yansıtın.
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
-            <div class="text-center p-6 bg-white shadow-sm rounded-xl border border-gray-100">
+        <div class="my-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-6">
+            <div class="text-center p-4 md:p-6 bg-white shadow-sm rounded-xl border border-gray-100 h-full" data-variant="white">
                 <div class="w-12 h-12 mx-auto bg-pink-100 rounded-full flex items-center justify-center text-pink-600 mb-4">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
@@ -146,7 +146,7 @@ HTML;
                 <p class="text-sm text-gray-500">2-3 hafta boyunca ilk günkü parlaklığını koruyan, çizilmeyen mükemmel görünüm.</p>
             </div>
 
-            <div class="text-center p-6 bg-white shadow-sm rounded-xl border border-gray-100">
+            <div class="text-center p-4 md:p-6 bg-white shadow-sm rounded-xl border border-gray-100 h-full" data-variant="white">
                 <div class="w-12 h-12 mx-auto bg-pink-100 rounded-full flex items-center justify-center text-pink-600 mb-4">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                 </div>
@@ -154,7 +154,7 @@ HTML;
                 <p class="text-sm text-gray-500">Tırnaklarınıza zarar vermeyen, aksine kırılmalara karşı koruma sağlayan özel formül.</p>
             </div>
 
-            <div class="text-center p-6 bg-white shadow-sm rounded-xl border border-gray-100">
+            <div class="text-center p-4 md:p-6 bg-white shadow-sm rounded-xl border border-gray-100 h-full" data-variant="white">
                 <div class="w-12 h-12 mx-auto bg-pink-100 rounded-full flex items-center justify-center text-pink-600 mb-4">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
                 </div>
@@ -163,7 +163,7 @@ HTML;
             </div>
         </div>
 
-        <div class="bg-gray-50 rounded-2xl p-8 my-8">
+        <div class="bg-gray-50 rounded-2xl p-6 md:p-8 h-full my-8">
             <h3 class="text-2xl font-serif text-gray-900 mb-6 text-center">Nail Art Seçeneklerimiz</h3>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                 <div class="flex items-center space-x-2">
@@ -206,34 +206,24 @@ HTML;
             Bakışlarınız, ifadenizin en güçlü parçasıdır. Yüz anatomisine ve altın orana uygun profesyonel kaş tasarımı ve kirpik uygulamalarımızla, doğal güzelliğinizi en etkileyici şekilde ortaya çıkarıyoruz.
         </p>
 
-        <div class="my-8 space-y-6">
-            <div class="flex flex-col md:flex-row gap-6 bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow">
-                <div class="bg-pink-50 p-6 md:w-1/3 flex flex-col justify-center items-center text-center">
-                    <h3 class="text-xl font-serif text-pink-900 mb-2">Kaş Tasarımı</h3>
-                    <p class="text-xs text-pink-600 uppercase tracking-wider">İfadenizi Güçlendirin</p>
-                </div>
-                <div class="p-6 md:w-2/3 flex flex-col justify-center">
-                    <p class="mb-4">Yüz şeklinize en uygun kaş formunu belirliyor, iplik, cımbız veya ağda teknikleriyle hassas şekillendirme yapıyoruz.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">Altın Oran Ölçümü</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">Kaş Laminasyonu</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">Kaş Boyama</span>
-                    </div>
+        <div class="my-8 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            <div class="bg-gray-50 rounded-2xl p-6 md:p-8 h-full" data-variant="gray">
+                <h3 class="text-xl font-serif text-pink-900 mb-2">Kaş Tasarımı</h3>
+                <p class="text-xs text-pink-600 uppercase tracking-wider mb-4">İfadenizi Güçlendirin</p>
+                <p class="mb-4 text-sm">Yüz şeklinize en uygun kaş formunu belirliyor, iplik, cımbız veya ağda teknikleriyle hassas şekillendirme yapıyoruz.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-white text-gray-600 text-xs rounded-full border border-gray-200">Altın Oran</span>
+                    <span class="px-3 py-1 bg-white text-gray-600 text-xs rounded-full border border-gray-200">Laminasyon</span>
                 </div>
             </div>
 
-            <div class="flex flex-col md:flex-row gap-6 bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-md transition-shadow">
-                <div class="bg-pink-50 p-6 md:w-1/3 flex flex-col justify-center items-center text-center">
-                    <h3 class="text-xl font-serif text-pink-900 mb-2">Kirpik Lifting</h3>
-                    <p class="text-xs text-pink-600 uppercase tracking-wider">Doğal ve Hacimli</p>
-                </div>
-                <div class="p-6 md:w-2/3 flex flex-col justify-center">
-                    <p class="mb-4">Kendi kirpiklerinizi kökten uca kıvırarak daha uzun, daha dolgun ve daha kıvrık görünmesini sağlayan bakım işlemidir.</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">6-8 Hafta Kalıcılık</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">Keratin Bakım</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">Maskara Etkisi</span>
-                    </div>
+            <div class="bg-gray-50 rounded-2xl p-6 md:p-8 h-full" data-variant="gray">
+                <h3 class="text-xl font-serif text-pink-900 mb-2">Kirpik Lifting</h3>
+                <p class="text-xs text-pink-600 uppercase tracking-wider mb-4">Doğal ve Hacimli</p>
+                <p class="mb-4 text-sm">Kendi kirpiklerinizi kökten uca kıvırarak daha uzun, daha dolgun ve daha kıvrık görünmesini sağlayan bakım işlemidir.</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-white text-gray-600 text-xs rounded-full border border-gray-200">6-8 Hafta</span>
+                    <span class="px-3 py-1 bg-white text-gray-600 text-xs rounded-full border border-gray-200">Keratin Bakım</span>
                 </div>
             </div>
         </div>

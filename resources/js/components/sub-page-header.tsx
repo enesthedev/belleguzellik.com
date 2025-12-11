@@ -1,4 +1,4 @@
-import ShowWelcomePage from '@/actions/App/Actions/ShowWelcomePage';
+import ShowWelcome from '@/actions/App/Actions/ShowWelcome';
 import { Link } from '@inertiajs/react';
 import { t } from 'i18next';
 import { ArrowLeft, Phone } from 'lucide-react';
@@ -9,7 +9,7 @@ export function SubPageHeader() {
         <header className="sticky top-0 z-50 border-b border-stone-200/60 bg-white/80 backdrop-blur-md">
             <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
                 <Link
-                    href={ShowWelcomePage.url()}
+                    href={ShowWelcome.url()}
                     className="flex items-center gap-2 text-stone-600 transition-colors hover:text-stone-900"
                 >
                     <ArrowLeft className="size-5" />
@@ -18,7 +18,7 @@ export function SubPageHeader() {
                     </span>
                 </Link>
 
-                <Link href={ShowWelcomePage.url()}>
+                <Link href={ShowWelcome.url()}>
                     <AppLogoIcon className="h-16 w-auto" />
                 </Link>
 

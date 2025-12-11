@@ -1,32 +1,14 @@
-import ShowServiceDetailPage from '@/actions/App/Actions/Services/ShowServiceDetailPage';
+import ShowService from '@/actions/App/Actions/ShowService';
 import { TiptapRenderer } from '@/components/tiptap/tiptap-renderer';
+import { Service } from '@/types/models';
 import { Head, Link } from '@inertiajs/react';
 import { ArrowRight, Clock } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import Layout from './layout';
 
-interface Service {
-    id: number;
-    slug: string;
-    name: string;
-    description: string | null;
-    content: string | null;
-    duration: number;
-    image_url: string | null;
-}
-
-interface RelatedService {
-    id: number;
-    slug: string;
-    name: string;
-    description: string | null;
-    duration: number;
-    image_url: string | null;
-}
-
 interface Props {
     service: Service;
-    relatedServices: RelatedService[];
+    relatedServices: Service[];
 }
 
 export default function ServiceShow({ service, relatedServices }: Props) {
@@ -42,11 +24,11 @@ export default function ServiceShow({ service, relatedServices }: Props) {
                         <img
                             src={service.image_url}
                             alt={service.name}
-                            className="aspect-[16/9] max-h-[40vh] w-full object-cover"
+                            className="aspect-video max-h-[40vh] w-full object-cover"
                         />
                     </div>
                 )}
-                <div className="mx-auto max-w-4xl">
+                <div className="mx-auto max-w-4xl px-4">
                     <h1 className="mb-4 font-serif text-4xl font-bold tracking-tight text-stone-800 md:text-5xl">
                         {service.name}
                     </h1>
@@ -59,7 +41,7 @@ export default function ServiceShow({ service, relatedServices }: Props) {
                     </div>
 
                     {service.content && (
-                        <div className="mb-12">
+                        <div className="mt-5 mb-12">
                             <TiptapRenderer
                                 content={service.content}
                                 className="text-stone-700"
@@ -76,9 +58,7 @@ export default function ServiceShow({ service, relatedServices }: Props) {
                                 {relatedServices.map((related) => (
                                     <Link
                                         key={related.id}
-                                        href={ShowServiceDetailPage.url(
-                                            related.slug,
-                                        )}
+                                        href={ShowService.url(related.slug)}
                                         className="group overflow-hidden rounded-2xl border border-stone-200/60 bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-amber-200/60 hover:shadow-xl"
                                     >
                                         <div className="aspect-[4/3] overflow-hidden">

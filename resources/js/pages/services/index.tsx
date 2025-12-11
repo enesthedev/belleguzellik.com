@@ -1,18 +1,10 @@
-import ShowServiceDetailPage from '@/actions/App/Actions/Services/ShowServiceDetailPage';
+import ShowService from '@/actions/App/Actions/ShowService';
+import { Service } from '@/types';
 import { Head, Link } from '@inertiajs/react';
 import { ArrowRight, Clock, Search } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Layout from './layout';
-
-interface Service {
-    id: number;
-    slug: string;
-    name: string;
-    description: string | null;
-    duration: number;
-    image_url: string | null;
-}
 
 interface Props {
     services: Service[];
@@ -66,7 +58,7 @@ export default function ServicesIndex({ services }: Props) {
                         {filteredServices.map((service) => (
                             <Link
                                 key={service.id}
-                                href={ShowServiceDetailPage.url(service.slug)}
+                                href={ShowService.url(service.slug)}
                                 className="group relative overflow-hidden rounded-2xl border border-stone-200/60 bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-amber-200/60 hover:shadow-xl"
                             >
                                 <div className="aspect-[4/3] overflow-hidden">
