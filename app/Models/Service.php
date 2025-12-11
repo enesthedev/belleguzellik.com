@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class Service extends Model implements HasMedia
+class Service extends Model implements HasMedia, Sitemapable
 {
     use HasFactory, HasSlug, InteractsWithMedia;
 
@@ -51,5 +53,11 @@ class Service extends Model implements HasMedia
     public function getImageUrlAttribute(): ?string
     {
         return $this->getFirstMediaUrl('image') ?: null;
+    }
+
+    public function toSitemapTag(): Url|string|array
+    {
+        return Url::create(route('services.show', $this))
+            ->setLastModificationDate($this->updated_at);
     }
 }
