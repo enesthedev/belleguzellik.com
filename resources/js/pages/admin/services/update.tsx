@@ -2,40 +2,27 @@ import ShowServices from '@/actions/App/Actions/Admin/Services/ShowServices';
 import ShowUpdateService from '@/actions/App/Actions/Admin/Services/ShowUpdateService';
 import UpdateService from '@/actions/App/Actions/Admin/Services/UpdateService';
 import UploadContentImage from '@/actions/App/Actions/Admin/Services/UploadContentImage';
-import HeadingSmall from '@/components/heading-small';
 import { TiptapEditor } from '@/components/tiptap/tiptap-editor';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { type BreadcrumbItem } from '@/types';
+import { Service, type BreadcrumbItem } from '@/types';
 import { Head, Link, useForm } from '@inertiajs/react';
-import { ArrowLeft, Upload } from 'lucide-react';
-import { type ChangeEvent, type FormEvent, useMemo, useRef } from 'react';
+import { Upload } from 'lucide-react';
+import { useMemo, useRef, type ChangeEvent, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuidv4 } from 'uuid';
 import Layout from '../layout';
-
-interface Service {
-    id: number;
-    name: string;
-    description: string | null;
-    content: string | null;
-    price: string;
-    duration: number;
-    slug: string;
-    is_active: boolean;
-    image_url: string | null;
-}
 
 interface Props {
     service: Service;
 }
 
-export default function EditServicePage({ service }: Props) {
+export default function UpdateServicePage({ service }: Props) {
     const { t } = useTranslation();
-    const fileInputRef = useRef<HTMLInputElement>(null);
 
+    const fileInputRef = useRef<HTMLInputElement>(null);
     const sessionKey = useMemo(() => uuidv4(), []);
 
     const breadcrumbs: BreadcrumbItem[] = [
@@ -44,7 +31,7 @@ export default function EditServicePage({ service }: Props) {
             href: ShowServices.url(),
         },
         {
-            title: t('Edit Service'),
+            title: service.name,
             href: ShowUpdateService.url({ service: service.slug }),
         },
     ];
@@ -77,26 +64,14 @@ export default function EditServicePage({ service }: Props) {
             <Head title={t('Edit Service')} />
 
             <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                    <Button variant="ghost" size="icon" asChild>
-                        <Link href={ShowServices.url()}>
-                            <ArrowLeft className="size-4" />
-                        </Link>
-                    </Button>
-                    <HeadingSmall
-                        title={t('Edit Service')}
-                        description={t('Update service information')}
-                    />
-                </div>
-
-                <form onSubmit={handleSubmit} className="max-w-2xl space-y-6">
+                <form onSubmit={handleSubmit} className="w-full space-y-6">
                     <div className="grid gap-2">
-                        <Label htmlFor="name">{t('Service Name')}</Label>
                         <Input
                             id="name"
                             value={data.name}
                             onChange={(e) => setData('name', e.target.value)}
                             placeholder={t('Enter service name')}
+                            className="rounded-none border-none px-0 py-0 text-xl shadow-none focus-visible:ring-0 md:text-2xl"
                         />
                         {errors.name && (
                             <p className="text-sm text-destructive">
