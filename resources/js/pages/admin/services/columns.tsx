@@ -1,11 +1,14 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import admin from '@/routes/admin';
+import { Link } from '@inertiajs/react';
 import { ColumnDef } from '@tanstack/react-table';
 import { Clock, Edit, Trash2 } from 'lucide-react';
 
 export interface Service {
     id: number;
     name: string;
+    slug: string;
     description: string | null;
     content: string | null;
     price: string;
@@ -16,13 +19,11 @@ export interface Service {
 }
 
 interface ColumnsProps {
-    onEdit: (service: Service) => void;
     onDelete: (id: number) => void;
     t: (key: string) => string;
 }
 
 export function getColumns({
-    onEdit,
     onDelete,
     t,
 }: ColumnsProps): ColumnDef<Service>[] {
@@ -104,10 +105,12 @@ export function getColumns({
                             variant="ghost"
                             size="icon"
                             className="size-8 text-muted-foreground hover:text-primary"
-                            onClick={() => onEdit(service)}
+                            asChild
                         >
-                            <span className="sr-only">{t('Edit')}</span>
-                            <Edit className="size-4" />
+                            <Link href={admin.services.edit(service.slug).url}>
+                                <span className="sr-only">{t('Edit')}</span>
+                                <Edit className="size-4" />
+                            </Link>
                         </Button>
                         <Button
                             variant="ghost"
@@ -124,4 +127,3 @@ export function getColumns({
         },
     ];
 }
-

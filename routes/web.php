@@ -8,6 +8,8 @@ use App\Actions\Admin\GetSidebarCounts;
 use App\Actions\Admin\Services\CreateService;
 use App\Actions\Admin\Services\DeleteService;
 use App\Actions\Admin\Services\GetServicesCount;
+use App\Actions\Admin\Services\ShowCreateServicePage;
+use App\Actions\Admin\Services\ShowEditServicePage;
 use App\Actions\Admin\Services\ShowServicesPage as AdminShowServicesPage;
 use App\Actions\Admin\Services\UpdateService;
 use App\Actions\Admin\Services\UploadContentImage;
@@ -37,8 +39,10 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
 
     Route::get('/services', AdminShowServicesPage::class)->name('services.index');
     Route::get('/services/count', GetServicesCount::class)->name('services.count');
+    Route::get('/services/create', ShowCreateServicePage::class)->name('services.create');
     Route::post('/services', CreateService::class)->name('services.store');
     Route::post('/services/upload-content-image', UploadContentImage::class)->name('services.upload-content-image');
+    Route::get('/services/{service}/edit', ShowEditServicePage::class)->name('services.edit');
     Route::put('/services/{service}', UpdateService::class)->name('services.update');
     Route::delete('/services/{service}', DeleteService::class)->name('services.destroy');
 });

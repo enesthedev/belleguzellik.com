@@ -9,15 +9,13 @@ import {
 } from '@/components/ui/empty';
 import admin from '@/routes/admin';
 import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { Plus, Scissors } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Layout from '../layout';
 import { getColumns, type Service } from './columns';
-import { CreateServiceSheet } from './components/create-service-sheet';
 import { DeleteServiceDialog } from './components/delete-service-dialog';
-import { EditServiceSheet } from './components/edit-service-sheet';
 import { DataTable } from './data-table';
 
 interface Props {
@@ -26,10 +24,7 @@ interface Props {
 
 export default function ServicesIndex({ services }: Props) {
     const { t } = useTranslation();
-    const [createSheetOpen, setCreateSheetOpen] = useState(false);
-    const [editSheetOpen, setEditSheetOpen] = useState(false);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-    const [serviceToEdit, setServiceToEdit] = useState<Service | null>(null);
     const [serviceToDelete, setServiceToDelete] = useState<number | null>(null);
 
     const breadcrumbs: BreadcrumbItem[] = [
@@ -39,11 +34,6 @@ export default function ServicesIndex({ services }: Props) {
         },
     ];
 
-    const handleEditClick = (service: Service) => {
-        setServiceToEdit(service);
-        setEditSheetOpen(true);
-    };
-
     const handleDeleteClick = (id: number) => {
         setServiceToDelete(id);
         setDeleteDialogOpen(true);
@@ -52,7 +42,6 @@ export default function ServicesIndex({ services }: Props) {
     const columns = useMemo(
         () =>
             getColumns({
-                onEdit: handleEditClick,
                 onDelete: handleDeleteClick,
                 t,
             }),
@@ -65,9 +54,11 @@ export default function ServicesIndex({ services }: Props) {
 
             <div className="flex flex-col gap-6">
                 <div className="flex items-center justify-between">
-                    <Button size="sm" onClick={() => setCreateSheetOpen(true)}>
-                        <Plus className="mr-1.5 size-3.5" />
-                        {t('Add Service')}
+                    <Button size="sm" asChild>
+                        <Link href={admin.services.create().url}>
+                            <Plus className="mr-1.5 size-3.5" />
+                            {t('Add Service')}
+                        </Link>
                     </Button>
                 </div>
 
@@ -89,15 +80,6 @@ export default function ServicesIndex({ services }: Props) {
                 )}
             </div>
 
-            <CreateServiceSheet
-                open={createSheetOpen}
-                onOpenChange={setCreateSheetOpen}
-            />
-            <EditServiceSheet
-                open={editSheetOpen}
-                onOpenChange={setEditSheetOpen}
-                service={serviceToEdit}
-            />
             <DeleteServiceDialog
                 open={deleteDialogOpen}
                 onOpenChange={setDeleteDialogOpen}
@@ -106,4 +88,3 @@ export default function ServicesIndex({ services }: Props) {
         </Layout>
     );
 }
-

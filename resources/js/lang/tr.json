@@ -175,5 +175,16 @@
     "Link": "Bağlantı",
     "Table": "Tablo",
     "Undo": "Geri Al",
-    "Redo": "Yinele"
+    "Redo": "Yinele",
+    "Layout Components": "Düzen Bileşenleri",
+    "2 Column Grid": "2 Sütunlu Grid",
+    "3 Column Grid": "3 Sütunlu Grid",
+    "Pink Card": "Pembe Kart",
+    "White Card": "Beyaz Kart",
+    "Gray Card": "Gri Kart",
+    "Callout": "Vurgulu Not",
+    "Icon List": "İkon Listesi",
+    "Align Left": "Sola Hizala",
+    "Align Center": "Ortala",
+    "Align Right": "Sağa Hizala"
 }

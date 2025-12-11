@@ -6,28 +6,22 @@ use App\Models\Service;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class ShowServicesPage
+class ShowEditServicePage
 {
-    public function __invoke(): Response
+    public function __invoke(Service $service): Response
     {
-        $services = Service::query()
-            ->orderByDesc('id')
-            ->get()
-            ->map(fn (Service $service) => [
+        return Inertia::render('admin/services/edit', [
+            'service' => [
                 'id' => $service->id,
                 'name' => $service->name,
-                'description' => $service->description,
                 'slug' => $service->slug,
+                'description' => $service->description,
                 'content' => $service->content,
                 'price' => $service->price,
                 'duration' => $service->duration,
                 'is_active' => $service->is_active,
                 'image_url' => $service->image_url,
-                'created_at' => $service->created_at->toDateTimeString(),
-            ]);
-
-        return Inertia::render('admin/services/index', [
-            'services' => $services,
+            ],
         ]);
     }
 }
