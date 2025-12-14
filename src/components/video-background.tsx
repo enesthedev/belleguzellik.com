@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 interface VideoBackgroundProps {
   thumbnail?: Media | null
-  video?: Media | null
+  movie?: Media | null
 }
 
 function getInitialLoadState(): boolean {
@@ -13,7 +13,7 @@ function getInitialLoadState(): boolean {
   return document.readyState === 'complete'
 }
 
-export function VideoBackground({ thumbnail, video }: VideoBackgroundProps) {
+export function VideoBackground({ thumbnail, movie }: VideoBackgroundProps) {
   const [shouldLoad, setShouldLoad] = useState(getInitialLoadState)
   const [opacity, setOpacity] = useState(1)
   const scrollContainerRef = useRef<Element | null>(null)
@@ -78,7 +78,7 @@ export function VideoBackground({ thumbnail, video }: VideoBackgroundProps) {
           className="absolute inset-0 h-full w-full object-cover object-top md:object-center"
         />
       )}
-      {shouldLoad && video && (
+      {shouldLoad && movie && (
         <video
           autoPlay
           muted
@@ -88,7 +88,7 @@ export function VideoBackground({ thumbnail, video }: VideoBackgroundProps) {
           className="absolute inset-0 h-full w-full object-cover object-top opacity-0 transition-opacity duration-700 md:object-center"
           onCanPlay={(e) => e.currentTarget.classList.replace('opacity-0', 'opacity-100')}
         >
-          <source src={video.url} type={video.mimeType} />
+          <source src={movie.url} type={movie.mimeType} />
         </video>
       )}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white via-60% to-white md:bg-gradient-to-l md:from-transparent md:via-white/10 md:via-0% md:to-white/70" />

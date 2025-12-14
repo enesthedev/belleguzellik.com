@@ -44,7 +44,7 @@ export function HeroBlock({
 
   return (
     <section id="hero" className="relative h-screen min-h-[600px] w-full overflow-hidden bg-white">
-      <VideoBackground video={backgroundVideo} thumbnail={backgroundImage} />
+      <VideoBackground movie={backgroundVideo} thumbnail={backgroundImage} />
 
       <div className="relative z-10 flex h-full flex-col items-center justify-end px-6 pb-12 md:w-1/2 md:items-start md:justify-center md:px-12 md:pb-0 lg:w-2/5 lg:px-16">
         {showLogo && (

@@ -33,6 +33,12 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      graphics: {
+        Logo: '@/components/logo',
+        Icon: '@/components/logo',
+      },
+    },
   },
   collections: [UsersCollection, MediaCollection, ServicesCollection, PagesCollection],
   editor: lexicalEditor(),
