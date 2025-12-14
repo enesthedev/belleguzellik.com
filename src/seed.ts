@@ -2,6 +2,8 @@ import fs from 'fs'
 import path from 'path'
 import type { Payload } from 'payload'
 
+import { turkishToSlug } from '@/utils'
+
 const SEED_MEDIA = {
   video: {
     filename: 'makeup-video.mp4',
@@ -14,6 +16,101 @@ const SEED_MEDIA = {
     mimeType: 'image/png',
   },
 }
+
+const SEED_SERVICES = [
+  {
+    name: 'Profesyonel Cilt Bakımı',
+    description:
+      'Cildinizin ihtiyaçlarına özel olarak tasarlanmış, derinlemesine temizlik ve nemlendirme içeren kapsamlı yüz bakımı.',
+    duration: 75,
+    image: {
+      filename: 'woman-receiving-facial-mask-applied-by-beautician.jpg',
+      alt: 'Profesyonel Cilt Bakımı',
+      mimeType: 'image/jpeg',
+    },
+    features: [
+      {
+        icon: 'Search',
+        title: 'Cilt Analizi',
+        description:
+          'Özel cihazlarla cildinizin nem, yağ ve elastikiyet seviyelerini ölçerek size özel bir yol haritası çıkarıyoruz.',
+      },
+      {
+        icon: 'Sparkles',
+        title: 'Derin Temizlik',
+        description:
+          'Gözeneklerinizi tıkayan kirlilik, makyaj kalıntıları ve ölü derilerden cildinizi nazikçe arındırıyoruz.',
+      },
+      {
+        icon: 'Heart',
+        title: 'Besleyici Bakım',
+        description:
+          'Cilt tipinize özel seçilmiş serumlar ve maskelerle cildinizin ihtiyaç duyduğu vitamin ve mineralleri sağlıyoruz.',
+      },
+      {
+        icon: 'Shield',
+        title: 'Koruma',
+        description:
+          'Nemlendirici ve SPF koruması ile bakımın etkisini mühürlüyor, cildinizi dış etkenlere karşı korumaya alıyoruz.',
+      },
+    ],
+  },
+  {
+    name: 'Kalıcı Oje & Nail Art',
+    description:
+      'Profesyonel kalıcı oje uygulaması ve özel tasarım nail art ile tırnaklarınızı sanata dönüştürün.',
+    duration: 60,
+    image: {
+      filename: 'nail-art.jpg',
+      alt: 'Kalıcı Oje & Nail Art',
+      mimeType: 'image/jpeg',
+    },
+    features: [
+      {
+        icon: 'Clock',
+        title: 'Uzun Ömürlü',
+        description:
+          '2-3 hafta boyunca ilk günkü parlaklığını koruyan, çizilmeyen mükemmel görünüm.',
+      },
+      {
+        icon: 'Shield',
+        title: 'Tırnak Dostu',
+        description:
+          'Tırnaklarınıza zarar vermeyen, aksine kırılmalara karşı koruma sağlayan özel formül.',
+      },
+      {
+        icon: 'Palette',
+        title: 'Sınırsız Sanat',
+        description: 'French, ombre, geometrik desenler veya taş süslemelerle tarzınızı yansıtın.',
+      },
+    ],
+  },
+  {
+    name: 'Kaş & Kirpik Tasarımı',
+    description:
+      'Yüz hatlarınıza uygun profesyonel kaş şekillendirme ve kirpik lifting ile bakışlarınızı canlandırın.',
+    duration: 90,
+    image: {
+      filename: 'woman-with-eyebrow-and-eyelash-design-applied.jpg',
+      alt: 'Kaş & Kirpik Tasarımı',
+      mimeType: 'image/jpeg',
+    },
+    features: [
+      {
+        icon: 'Scissors',
+        title: 'Kaş Tasarımı',
+        description:
+          'Yüz şeklinize en uygun kaş formunu belirliyor, iplik, cımbız veya ağda teknikleriyle hassas şekillendirme yapıyoruz.',
+      },
+      {
+        icon: 'Eye',
+        title: 'Kirpik Lifting',
+        description:
+          'Kendi kirpiklerinizi kökten uca kıvırarak daha uzun, daha dolgun ve daha kıvrık görünmesini sağlayan bakım işlemidir.',
+      },
+    ],
+  },
+]
 
 async function getOrCreateMedia(
   payload: Payload,
@@ -61,7 +158,52 @@ async function getOrCreateMedia(
   return media.id
 }
 
-export async function seed(payload: Payload): Promise<void> {
+async function seedServices(payload: Payload): Promise<void> {
+  payload.logger.info('Seeding services...')
+
+  for (const serviceData of SEED_SERVICES) {
+    const { docs: existingServices } = await payload.find({
+      collection: 'services',
+      where: {
+        name: {
+          equals: serviceData.name,
+        },
+      },
+      limit: 1,
+    })
+
+    if (existingServices.length > 0) {
+      payload.logger.info(`Service already exists: ${serviceData.name}`)
+      continue
+    }
+
+    const coverImageId = await getOrCreateMedia(payload, serviceData.image)
+
+    await payload.create({
+      collection: 'services',
+      draft: false,
+      data: {
+        name: serviceData.name,
+        slug: turkishToSlug(serviceData.name),
+        description: serviceData.description,
+        duration: serviceData.duration,
+        coverImage: coverImageId ?? undefined,
+        content: [
+          {
+            blockType: 'features',
+            features: serviceData.features,
+          },
+        ],
+      },
+    })
+
+    payload.logger.info(`Created service: ${serviceData.name}`)
+  }
+
+  payload.logger.info('Services seeded successfully')
+}
+
+async function seedHomePage(payload: Payload): Promise<void> {
   const { docs: existingPages } = await payload.find({
     collection: 'pages',
     where: {
@@ -73,7 +215,7 @@ export async function seed(payload: Payload): Promise<void> {
   })
 
   if (existingPages.length > 0) {
-    payload.logger.info('Home page already exists, skipping seed')
+    payload.logger.info('Home page already exists, skipping')
     return
   }
 
@@ -116,4 +258,9 @@ export async function seed(payload: Payload): Promise<void> {
   })
 
   payload.logger.info('Home page seeded successfully')
+}
+
+export async function seed(payload: Payload): Promise<void> {
+  await seedHomePage(payload)
+  await seedServices(payload)
 }

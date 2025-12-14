@@ -64,10 +64,10 @@ export async function ServicesCarouselBlock({ heading, description }: ServicesCa
               return (
                 <CarouselItem key={service.id} className="pl-4 sm:basis-1/2 lg:basis-1/3">
                   <Link
-                    href={`/services/${service.slug}`}
+                    href={`/hizmetler/${service.slug}`}
                     className="group relative block h-full overflow-hidden rounded-2xl border border-stone-200/60 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-amber-200/60"
                   >
-                    <div className="aspect-[4/3] overflow-hidden relative">
+                    <div className="aspect-4/3 overflow-hidden relative">
                       {imageUrl ? (
                         <Image
                           src={imageUrl}

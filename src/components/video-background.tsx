@@ -8,19 +8,18 @@ interface VideoBackgroundProps {
   movie?: Media | null
 }
 
-function getInitialLoadState(): boolean {
-  if (typeof document === 'undefined') return false
-  return document.readyState === 'complete'
-}
-
 export function VideoBackground({ thumbnail, movie }: VideoBackgroundProps) {
-  const [shouldLoad, setShouldLoad] = useState(getInitialLoadState)
+  const [shouldLoad, setShouldLoad] = useState(false)
   const [opacity, setOpacity] = useState(1)
-  const scrollContainerRef = useRef<Element | null>(null)
   const rafIdRef = useRef<number>(0)
 
   useEffect(() => {
     if (shouldLoad) return
+
+    if (document.readyState === 'complete') {
+      setShouldLoad(true)
+      return
+    }
 
     const handleLoad = () => setShouldLoad(true)
     window.addEventListener('load', handleLoad)
@@ -75,7 +74,7 @@ export function VideoBackground({ thumbnail, movie }: VideoBackgroundProps) {
           alt={thumbnail.alt}
           loading="lazy"
           decoding="async"
-          className="absolute inset-0 h-full w-full object-cover object-top md:object-center"
+          className="absolute inset-0 h-full w-full object-cover object-top grayscale brightness-75 contrast-125 md:object-center"
         />
       )}
       {shouldLoad && movie && (
@@ -85,7 +84,7 @@ export function VideoBackground({ thumbnail, movie }: VideoBackgroundProps) {
           loop
           playsInline
           preload="none"
-          className="absolute inset-0 h-full w-full object-cover object-top opacity-0 transition-opacity duration-700 md:object-center"
+          className="absolute inset-0 h-full w-full object-cover object-top opacity-0 grayscale brightness-75 contrast-125 transition-opacity duration-700 md:object-center"
           onCanPlay={(e) => e.currentTarget.classList.replace('opacity-0', 'opacity-100')}
         >
           <source src={movie.url} type={movie.mimeType} />
