@@ -9,7 +9,7 @@ interface CTABlockProps {
 
 export function CTABlock({ heading, description, buttonText, buttonLink }: CTABlockProps) {
   return (
-    <section className="py-12">
+    <div className="flex flex-col justify-center py-12">
       <div className="rounded-2xl bg-primary px-6 py-12 text-center text-primary-foreground">
         <h2 className="text-2xl font-bold md:text-3xl">{heading}</h2>
         {description && (
@@ -22,6 +22,6 @@ export function CTABlock({ heading, description, buttonText, buttonLink }: CTABl
           {buttonText}
         </Link>
       </div>
-    </section>
+    </div>
   )
 }

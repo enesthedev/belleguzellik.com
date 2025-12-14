@@ -1,2 +1,2 @@
 export * from './services-carousel'
-export * from './services-carousel.client'
+export * from './services-carousel.server'

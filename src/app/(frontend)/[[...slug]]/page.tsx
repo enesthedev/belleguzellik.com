@@ -149,9 +149,11 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug?:
     notFound()
   }
 
+  const enableFullscreen = page.enableFullscreenSections ?? false
+
   return (
-    <main>
-      <RenderBlocks blocks={page.layout} />
+    <main className={enableFullscreen ? 'h-screen overflow-hidden' : ''}>
+      <RenderBlocks blocks={page.layout} enableFullscreenSections={enableFullscreen} />
     </main>
   )
 }

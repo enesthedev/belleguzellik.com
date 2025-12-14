@@ -14,7 +14,7 @@ export function FeaturesBlock({ features }: FeaturesBlockProps) {
   if (!features || features.length === 0) return null
 
   return (
-    <section className="py-12">
+    <div className="flex flex-col justify-center py-12">
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {features.map((feature, index) => {
           const IconComponent = feature.icon
@@ -39,6 +39,6 @@ export function FeaturesBlock({ features }: FeaturesBlockProps) {
           )
         })}
       </div>
-    </section>
+    </div>
   )
 }

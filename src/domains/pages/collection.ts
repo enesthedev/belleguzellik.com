@@ -29,6 +29,18 @@ export const PagesCollection: CollectionConfig = {
       },
     }),
     {
+      name: 'enableFullscreenSections',
+      type: 'checkbox',
+      defaultValue: false,
+      label: { en: 'Enable Fullscreen Sections', tr: 'Tam Ekran Bölümler' },
+      admin: {
+        description: {
+          en: 'When enabled, each section will take full screen height with scroll snap',
+          tr: 'Aktif olduğunda her bölüm tam ekran yüksekliğinde olur ve scroll snap kullanılır',
+        },
+      },
+    },
+    {
       name: 'layout',
       type: 'blocks',
       required: true,

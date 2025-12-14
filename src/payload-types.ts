@@ -252,6 +252,10 @@ export interface Page {
    */
   generateSlug?: boolean | null;
   slug: string;
+  /**
+   * When enabled, each section will take full screen height with scroll snap
+   */
+  enableFullscreenSections?: boolean | null;
   layout: (
     | {
         heading?: string | null;
@@ -483,6 +487,7 @@ export interface PagesSelect<T extends boolean = true> {
   title?: T;
   generateSlug?: T;
   slug?: T;
+  enableFullscreenSections?: T;
   layout?:
     | T
     | {

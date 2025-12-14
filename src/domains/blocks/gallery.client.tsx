@@ -10,7 +10,7 @@ export function GalleryBlock({ images }: GalleryBlockProps) {
   if (!images || images.length === 0) return null
 
   return (
-    <section className="py-12">
+    <div className="flex flex-col justify-center py-12">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {images.map((item, index) => {
           const image = typeof item.image === 'object' ? item.image : null
@@ -30,6 +30,6 @@ export function GalleryBlock({ images }: GalleryBlockProps) {
           )
         })}
       </div>
-    </section>
+    </div>
   )
 }
