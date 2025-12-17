@@ -19,27 +19,22 @@
     {
       "binding": "D1",
       "database_id": "DATABASE_ID",
-      "database_name": "belle-beauty",
+      "database_name": "belle-guzellik",
       "remote": true,
     },
   ],
   "services": [
     // The service should match the "name" of your worker
-    // {
-    //   "binding": "WORKER_SELF_REFERENCE",
-    //   "service": "my-app"
-    // },
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "belle-guzellik",
+    },
   ],
   "r2_buckets": [
     {
       "binding": "R2",
-      "bucket_name": "belle-beauty-r2",
+      "bucket_name": "belleguzellik-r2",
     },
-    // Create a R2 binding with the binding name "NEXT_INC_CACHE_R2_BUCKET"
-    // {
-    //   "binding": "NEXT_INC_CACHE_R2_BUCKET",
-    //   "bucket_name": "<BUCKET_NAME>",
-    // },
   ],
 
   // Here's how to configure an additional environment

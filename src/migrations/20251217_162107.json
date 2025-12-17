@@ -724,6 +724,103 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
+    "pages_blocks_services_grid": {
+      "name": "pages_blocks_services_grid",
+      "columns": {
+        "_order": {
+          "name": "_order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "_parent_id": {
+          "name": "_parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "_path": {
+          "name": "_path",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "heading": {
+          "name": "heading",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": "'Hizmetlerimiz'"
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": "'Size sunduğumuz profesyonel hizmetleri keşfedin'"
+        },
+        "block_name": {
+          "name": "block_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "pages_blocks_services_grid_order_idx": {
+          "name": "pages_blocks_services_grid_order_idx",
+          "columns": [
+            "_order"
+          ],
+          "isUnique": false
+        },
+        "pages_blocks_services_grid_parent_id_idx": {
+          "name": "pages_blocks_services_grid_parent_id_idx",
+          "columns": [
+            "_parent_id"
+          ],
+          "isUnique": false
+        },
+        "pages_blocks_services_grid_path_idx": {
+          "name": "pages_blocks_services_grid_path_idx",
+          "columns": [
+            "_path"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "pages_blocks_services_grid_parent_id_fk": {
+          "name": "pages_blocks_services_grid_parent_id_fk",
+          "tableFrom": "pages_blocks_services_grid",
+          "tableTo": "pages",
+          "columnsFrom": [
+            "_parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
     "pages_blocks_service_header": {
       "name": "pages_blocks_service_header",
       "columns": {
@@ -2011,6 +2108,6 @@
   "internal": {
     "indexes": {}
   },
-  "id": "7ef8b848-ce35-4ab5-9e12-b89242e1faa8",
+  "id": "87ac7fa7-d5d5-4cac-a128-032eefc1c4e5",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }

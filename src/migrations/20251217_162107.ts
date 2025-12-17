@@ -106,6 +106,20 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.run(sql`CREATE INDEX \`pages_blocks_services_carousel_order_idx\` ON \`pages_blocks_services_carousel\` (\`_order\`);`)
   await db.run(sql`CREATE INDEX \`pages_blocks_services_carousel_parent_id_idx\` ON \`pages_blocks_services_carousel\` (\`_parent_id\`);`)
   await db.run(sql`CREATE INDEX \`pages_blocks_services_carousel_path_idx\` ON \`pages_blocks_services_carousel\` (\`_path\`);`)
+  await db.run(sql`CREATE TABLE \`pages_blocks_services_grid\` (
+  	\`_order\` integer NOT NULL,
+  	\`_parent_id\` integer NOT NULL,
+  	\`_path\` text NOT NULL,
+  	\`id\` text PRIMARY KEY NOT NULL,
+  	\`heading\` text DEFAULT 'Hizmetlerimiz',
+  	\`description\` text DEFAULT 'Size sunduğumuz profesyonel hizmetleri keşfedin',
+  	\`block_name\` text,
+  	FOREIGN KEY (\`_parent_id\`) REFERENCES \`pages\`(\`id\`) ON UPDATE no action ON DELETE cascade
+  );
+  `)
+  await db.run(sql`CREATE INDEX \`pages_blocks_services_grid_order_idx\` ON \`pages_blocks_services_grid\` (\`_order\`);`)
+  await db.run(sql`CREATE INDEX \`pages_blocks_services_grid_parent_id_idx\` ON \`pages_blocks_services_grid\` (\`_parent_id\`);`)
+  await db.run(sql`CREATE INDEX \`pages_blocks_services_grid_path_idx\` ON \`pages_blocks_services_grid\` (\`_path\`);`)
   await db.run(sql`CREATE TABLE \`pages_blocks_service_header\` (
   	\`_order\` integer NOT NULL,
   	\`_parent_id\` integer NOT NULL,
@@ -301,6 +315,7 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   await db.run(sql`DROP TABLE \`pages_blocks_video_hero_actions\`;`)
   await db.run(sql`DROP TABLE \`pages_blocks_video_hero\`;`)
   await db.run(sql`DROP TABLE \`pages_blocks_services_carousel\`;`)
+  await db.run(sql`DROP TABLE \`pages_blocks_services_grid\`;`)
   await db.run(sql`DROP TABLE \`pages_blocks_service_header\`;`)
   await db.run(sql`DROP TABLE \`pages_blocks_rich_text\`;`)
   await db.run(sql`DROP TABLE \`pages_blocks_features_features\`;`)
