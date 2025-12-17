@@ -1,6 +1,7 @@
 import { CloudflareContext, getCloudflareContext } from '@opennextjs/cloudflare'
 import { sqliteD1Adapter } from '@payloadcms/db-d1-sqlite'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { seoPlugin } from '@payloadcms/plugin-seo'
 import { r2Storage } from '@payloadcms/storage-r2'
 import { en } from '@payloadcms/translations/languages/en'
 import { tr } from '@payloadcms/translations/languages/tr'
@@ -35,7 +36,6 @@ export default buildConfig({
     components: {
       graphics: {
         Logo: '@/components/logo',
-        Icon: '@/components/logo',
       },
     },
   },
@@ -52,6 +52,17 @@ export default buildConfig({
     r2Storage({
       bucket: cloudflare.env.R2,
       collections: { media: true },
+    }),
+    seoPlugin({
+      tabbedUI: true,
+      collections: ['pages'],
+      uploadsCollection: 'media',
+      generateTitle: ({ doc }) => `${doc.title} - ${process.env.SITE_NAME}`,
+      generateDescription: ({ doc }) => doc.excerpt,
+      generateURL: ({ doc }) => {
+        const slug = doc?.slug || ''
+        return slug === '/' ? `${process.env.SITE_URL}` : `${process.env.SITE_URL}/${slug}`
+      },
     }),
   ],
   i18n: {

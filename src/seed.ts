@@ -291,7 +291,7 @@ async function seedHomePage(payload: Payload): Promise<void> {
     collection: 'pages',
     where: {
       slug: {
-        equals: 'anasayfa',
+        equals: '/',
       },
     },
     limit: 1,
@@ -311,7 +311,7 @@ async function seedHomePage(payload: Payload): Promise<void> {
     collection: 'pages',
     data: {
       title: 'Anasayfa',
-      slug: 'anasayfa',
+      slug: '/',
       layout: [
         {
           blockType: 'hero',

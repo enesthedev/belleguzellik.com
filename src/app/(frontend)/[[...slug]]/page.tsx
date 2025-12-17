@@ -19,7 +19,7 @@ export async function generateStaticParams() {
   })
 
   return pages.map((page) => ({
-    slug: page.slug === 'anasayfa' ? [] : page.slug?.split('/') || [],
+    slug: page.slug === '/' ? [] : page.slug?.split('/') || [],
   }))
 }
 
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
 
-  const pageSlug = segments.join('/') || 'anasayfa'
+  const pageSlug = segments.join('/') || '/'
 
   const { docs: pages } = await payload.find({
     collection: 'pages',
@@ -48,8 +48,33 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: 'Sayfa Bulunamadı' }
   }
 
+  const meta = page.meta
+
+  const ogImage =
+    meta?.image && typeof meta.image === 'object' && meta.image.url
+      ? {
+          url: meta.image.url,
+          width: meta.image.width || 1200,
+          height: meta.image.height || 630,
+          alt: meta.image.alt || page.title,
+        }
+      : undefined
+
   return {
-    title: page.title,
+    title: meta?.title || page.title,
+    description: meta?.description || undefined,
+    openGraph: {
+      title: meta?.title || page.title,
+      description: meta?.description || undefined,
+      url: pageSlug === '/' ? '/' : `/${pageSlug}`,
+      ...(ogImage && { images: [ogImage] }),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: meta?.title || page.title,
+      description: meta?.description || undefined,
+      ...(ogImage && { images: [ogImage.url] }),
+    },
   }
 }
 
@@ -60,7 +85,8 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug?:
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
 
-  const pageSlug = segments.join('/') || 'anasayfa'
+  // URL'de slug yoksa ana sayfa için '/' slug'ını kullan
+  const pageSlug = segments.join('/') || '/'
 
   const { docs: pages } = await payload.find({
     collection: 'pages',
@@ -81,7 +107,7 @@ export default async function DynamicPage({ params }: { params: Promise<{ slug?:
           <h1 className="text-2xl font-bold">Hoş Geldiniz</h1>
           <p>Ana sayfa içeriği henüz oluşturulmadı.</p>
           <p className="text-muted-foreground">
-            Lütfen Admin Paneline gidip slug&apos;ı &quot;anasayfa&quot; olan bir sayfa oluşturun.
+            Lütfen Admin Paneline gidip slug&apos;ı &quot;/&quot; olan bir sayfa oluşturun.
           </p>
         </div>
       )

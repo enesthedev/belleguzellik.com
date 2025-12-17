@@ -1,6 +1,7 @@
 import LogoImage from '@/assets/belle-guzellik.png'
-import { cn } from '@/utils/cn'
 import Image from 'next/image'
+
+import { cn } from '@/utils/cn'
 
 export default function Logo({ className }: { className?: string }) {
   return (
