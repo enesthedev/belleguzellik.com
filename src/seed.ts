@@ -314,8 +314,7 @@ async function seedHomePage(payload: Payload): Promise<void> {
       slug: '/',
       layout: [
         {
-          blockType: 'hero',
-          showLogo: true,
+          blockType: 'video-hero',
           backgroundVideo: videoId,
           backgroundImage: thumbnailId,
           actions: [

@@ -200,9 +200,6 @@ export interface Page {
   enableFullscreenSections?: boolean | null;
   layout: (
     | {
-        heading?: string | null;
-        showLogo?: boolean | null;
-        subheading?: string | null;
         backgroundImage?: (number | null) | Media;
         backgroundVideo?: (number | null) | Media;
         actions?:
@@ -215,7 +212,7 @@ export interface Page {
           | null;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'hero';
+        blockType: 'video-hero';
       }
     | {
         heading?: string | null;
@@ -444,12 +441,9 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
-        hero?:
+        'video-hero'?:
           | T
           | {
-              heading?: T;
-              showLogo?: T;
-              subheading?: T;
               backgroundImage?: T;
               backgroundVideo?: T;
               actions?:

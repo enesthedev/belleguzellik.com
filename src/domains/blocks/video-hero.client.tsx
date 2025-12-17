@@ -5,12 +5,9 @@ import { VideoBackground } from '@/components/video-background'
 import type { Media } from '@/payload-types'
 import { Clock, MapPin, Phone } from 'lucide-react'
 
-interface HeroBlockProps {
-  heading?: string | null
-  subheading?: string | null
+interface VideoHeroBlockProps {
   backgroundImage?: Media | null
   backgroundVideo?: Media | null
-  showLogo?: boolean | null
   actions?:
     | {
         label: string
@@ -21,14 +18,7 @@ interface HeroBlockProps {
     | null
 }
 
-export function HeroBlock({
-  heading,
-  subheading,
-  backgroundImage,
-  backgroundVideo,
-  showLogo,
-  actions,
-}: HeroBlockProps) {
+export function VideoHeroBlock({ backgroundImage, backgroundVideo, actions }: VideoHeroBlockProps) {
   const getIcon = (iconName?: string | null) => {
     switch (iconName) {
       case 'map-pin':
@@ -47,23 +37,9 @@ export function HeroBlock({
       <VideoBackground movie={backgroundVideo} thumbnail={backgroundImage} />
 
       <div className="relative z-10 flex h-full flex-col items-center justify-end px-6 pb-12 md:w-1/2 md:items-start md:justify-center md:px-12 md:pb-0 lg:w-2/5 lg:px-16">
-        {showLogo && (
-          <Animated as="header" className="mb-6 flex w-full justify-center delay-200 md:mb-8">
-            <Logo className="h-52 w-auto " />
-          </Animated>
-        )}
-
-        {heading && (
-          <Animated className="mb-4 text-center md:text-left delay-200">
-            <h1 className="text-4xl font-bold tracking-tight text-white md:text-6xl">{heading}</h1>
-          </Animated>
-        )}
-
-        {subheading && (
-          <Animated className="mb-8 text-center md:text-left delay-300">
-            <p className="max-w-2xl text-lg text-white/90 md:text-xl">{subheading}</p>
-          </Animated>
-        )}
+        <Animated as="header" className="mb-6 flex w-full justify-center delay-200 md:mb-8">
+          <Logo className="h-52 w-auto " />
+        </Animated>
 
         {actions && actions.length > 0 && (
           <div className="w-full max-w-md text-center md:max-w-none md:text-left">

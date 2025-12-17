@@ -1,11 +1,11 @@
 import { CTABlock } from '@/domains/blocks/cta.client'
 import { FeaturesBlock } from '@/domains/blocks/features.client'
 import { GalleryBlock } from '@/domains/blocks/gallery.client'
-import { HeroBlock } from '@/domains/blocks/hero.client'
 import { RichTextBlock } from '@/domains/blocks/rich-text.client'
 import { ServiceHeaderBlock } from '@/domains/services/blocks/service-header.client'
 import { ServicesCarouselBlock } from '@/domains/services/blocks/services-carousel.server'
 
+import { VideoHeroBlock } from '@/domains/blocks/video-hero.client'
 import { Section } from './section'
 
 interface Block {
@@ -19,13 +19,12 @@ interface RenderBlocksProps {
 }
 
 const blockAriaLabels: Record<string, string> = {
-  hero: 'Ana Bölüm',
   'services-carousel': 'Hizmetler',
   'service-header': 'Hizmet Başlığı',
+  'video-hero': 'Videolu Kahraman Bölümü',
   'rich-text': 'İçerik',
   gallery: 'Galeri',
   features: 'Özellikler',
-  cta: 'Harekete Geçirici',
 }
 
 export function RenderBlocks({ blocks, enableFullscreenSections = false }: RenderBlocksProps) {
@@ -33,14 +32,11 @@ export function RenderBlocks({ blocks, enableFullscreenSections = false }: Rende
 
   const renderBlock = (block: Block) => {
     switch (block.blockType) {
-      case 'hero':
+      case 'video-hero':
         return (
-          <HeroBlock
-            heading={block.heading}
-            subheading={block.subheading}
+          <VideoHeroBlock
             backgroundImage={block.backgroundImage}
             backgroundVideo={block.backgroundVideo}
-            showLogo={block.showLogo}
             actions={block.actions}
           />
         )

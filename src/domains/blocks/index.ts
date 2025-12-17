@@ -1,5 +1,5 @@
 export * from './cta'
 export * from './features'
 export * from './gallery'
-export * from './hero'
 export * from './rich-text'
+export * from './video-hero'

@@ -1,29 +1,12 @@
 import type { Block } from 'payload'
 
-export const hero: Block = {
-  slug: 'hero',
+export const videoHero: Block = {
+  slug: 'video-hero',
   labels: {
-    singular: { en: 'Hero Section', tr: 'Kahraman Bölümü' },
-    plural: { en: 'Hero Sections', tr: 'Kahraman Bölümleri' },
+    singular: { en: 'Video Hero Section', tr: 'Videolu Kahraman Bölümü' },
+    plural: { en: 'Video Hero Sections', tr: 'Videolu Kahraman Bölümleri' },
   },
   fields: [
-    {
-      name: 'heading',
-      type: 'text',
-      label: { en: 'Heading', tr: 'Başlık' },
-      required: false,
-    },
-    {
-      name: 'showLogo',
-      type: 'checkbox',
-      label: { en: 'Show Logo', tr: 'Logoyu Göster' },
-      defaultValue: true,
-    },
-    {
-      name: 'subheading',
-      type: 'textarea',
-      label: { en: 'Subheading', tr: 'Alt Başlık' },
-    },
     {
       name: 'backgroundImage',
       type: 'upload',

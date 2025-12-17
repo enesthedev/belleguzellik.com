@@ -71,14 +71,19 @@ src/
 │
 ├── domains/                  # Domain-driven design structure
 │   ├── blocks/               # CMS Block types (page builder)
-│   │   ├── hero.ts / hero.client.tsx
+│   │   ├── video-hero.ts / video-hero.client.tsx
 │   │   ├── features.ts / features.client.tsx
 │   │   ├── gallery.ts / gallery.client.tsx
 │   │   ├── cta.ts / cta.client.tsx
 │   │   └── rich-text.ts / rich-text.client.tsx
+│   ├── globals/              # Global CMS configurations
 │   ├── media/                # Media collection
 │   ├── pages/                # Pages collection (CMS managed)
 │   ├── services/             # Services collection
+│   │   ├── blocks/           # Service-specific blocks
+│   │   │   ├── service-header.ts / service-header.client.tsx
+│   │   │   └── services-carousel.ts / services-carousel.client.tsx
+│   │   └── components/       # Service-related React components
 │   └── users/                # Users collection (authentication)
 │
 ├── i18n/                     # Internationalization config
@@ -129,11 +134,17 @@ src/
 | **Pages** | `pages` | CMS-managed pages with SEO |
 
 ### Available Blocks (Page Builder)
-- `hero` - Hero sections with video/image backgrounds
+
+**General Blocks** (`src/domains/blocks/`):
+- `video-hero` - Hero sections with video/image backgrounds
 - `features` - Feature highlights grid
 - `gallery` - Image gallery/carousel
 - `cta` - Call-to-action sections
 - `rich-text` - Rich text content (Lexical)
+
+**Service Blocks** (`src/domains/services/blocks/`):
+- `service-header` - Service detail page header
+- `services-carousel` - Services carousel/slider (with server component)
 
 ---
 
@@ -190,7 +201,7 @@ Cloudflare bindings (auto-configured via Wrangler):
 
 1. **Type Generation**: After modifying Payload collections, run `pnpm generate:types:payload`
 2. **Migrations**: After schema changes, run `pnpm payload migrate:create`
-3. **Block Development**: Always create both `.ts` (schema) and `.client.tsx` (component) files
+3. **Block Development**: Always create both `.ts` (schema) and `.client.tsx` (component) files. For data-fetching blocks, use `.server.tsx` pattern (see `services-carousel`)
 4. **Styling**: Use TailwindCSS 4.x syntax, component variants via CVA
 5. **Language**: Project supports TR (Turkish) as primary with EN fallback
 6. **Deployment**: Uses OpenNext for Cloudflare Workers compatibility
